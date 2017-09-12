@@ -1,0 +1,67 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXGroup section */
+		B2EAA18C1F67DC5C00B80D57 = {
+			isa = PBXGroup;
+			children = (
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		B2EAA18D1F67DC5C00B80D57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+			};
+			buildConfigurationList = B2EAA1901F67DC5C00B80D57 /* Build configuration list for PBXProject "MIDISequencer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B2EAA18C1F67DC5C00B80D57;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		B2EAA1911F67DC5C00B80D57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		B2EAA1921F67DC5C00B80D57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B2EAA1901F67DC5C00B80D57 /* Build configuration list for PBXProject "MIDISequencer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2EAA1911F67DC5C00B80D57 /* Debug */,
+				B2EAA1921F67DC5C00B80D57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B2EAA18D1F67DC5C00B80D57 /* Project object */;
+}
