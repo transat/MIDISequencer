@@ -1,0 +1,6 @@
+framework module Pods_MIDISequencer_iOS {
+  umbrella header "Pods-MIDISequencer iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
