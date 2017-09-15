@@ -2,7 +2,7 @@ MIDISequencer
 ===
 
 MIDI Sequencer that sends MIDI events to other apps.  
-Built top on AKSequencer of AudioKit for iOS and macOS.  
+Built top on [`AKSequencer`](https://github.com/AudioKit/AudioKit/blob/master/AudioKit/Common/MIDI/Sequencer/AKSequencer.swift) of [AudioKit](https://github.com/AudioKit/AudioKit) for iOS and macOS.  
 Create smart MIDI sequencer instruments with just focus on notes.
 
 Requirements
