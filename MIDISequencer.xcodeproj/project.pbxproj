@@ -883,6 +883,7 @@
 				B2EAA1CC1F697A9000B80D57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

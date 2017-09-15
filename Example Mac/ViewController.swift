@@ -36,25 +36,26 @@ class ViewController: NSViewController {
 
     let track1 = MIDISequencerTrack(
       name: "Track 1",
-      midiChannel: 1,
-      steps: [
-        MIDISequencerStep(
-          note: Note(type: .c, octave: 4),
-          noteValue: NoteValue(type: .quarter),
-          velocity: .standard(100)),
-        MIDISequencerStep(
-          note: Note(type: .d, octave: 4),
-          noteValue: NoteValue(type: .quarter),
-          velocity: .standard(100)),
-        MIDISequencerStep(
-          note: Note(type: .e, octave: 4),
-          noteValue: NoteValue(type: .quarter),
-          velocity: .standard(100)),
-        MIDISequencerStep(
-          note: Note(type: .f, octave: 4),
-          noteValue: NoteValue(type: .quarter),
-          velocity: .standard(100)),
-      ])
+      midiChannel: 1)
+
+    track1.steps = [
+      MIDISequencerStep(
+        note: Note(type: .c, octave: 4),
+        noteValue: NoteValue(type: .quarter),
+        velocity: .standard(100)),
+      MIDISequencerStep(
+        note: Note(type: .d, octave: 4),
+        noteValue: NoteValue(type: .quarter),
+        velocity: .standard(100)),
+      MIDISequencerStep(
+        note: Note(type: .e, octave: 4),
+        noteValue: NoteValue(type: .quarter),
+        velocity: .standard(100)),
+      MIDISequencerStep(
+        note: Note(type: .f, octave: 4),
+        noteValue: NoteValue(type: .quarter),
+        velocity: .standard(100)),
+    ]
 
     let track2 = MIDISequencerTrack(
       name: "Track 2",

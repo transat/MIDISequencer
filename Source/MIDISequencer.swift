@@ -221,7 +221,7 @@ public class MIDISequencer {
     }
 
     sequencer?.setTempo(tempo.bpm)
-    sequencer?.enableLooping(AKDuration(beats: sequencer!.length.beats + 1))
+    sequencer?.enableLooping(AKDuration(beats: Double(tracks.map({ $0.steps.count }).sorted().first ?? 0)))
   }
 
   /// Plays the sequence from begining.
