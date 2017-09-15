@@ -46,6 +46,7 @@ public class MIDISequencer {
     for track in tracks {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
       newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
+
       for (index, step) in track.steps.enumerated() {
         if step.isMuted { continue }
         for note in step.notes {

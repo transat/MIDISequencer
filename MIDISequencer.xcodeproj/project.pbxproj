@@ -15,6 +15,8 @@
 		B2A730D41F6C82630040F34F /* MIDISequencerStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */; };
 		B2A730D51F6C82630040F34F /* MIDISequencerTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */; };
 		B2A730D61F6C82630040F34F /* MIDISequencerCallbackInstrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */; };
+		B2A730D81F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */; };
+		B2A730D91F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */; };
 		B2EAA1B61F67DCEA00B80D57 /* MIDISequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2EAA1B11F67DCEA00B80D57 /* MIDISequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2EAA1B71F67DCEA00B80D57 /* MIDISequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2EAA1B11F67DCEA00B80D57 /* MIDISequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2EAA1B91F67DD1D00B80D57 /* MIDISequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EAA1B81F67DD1D00B80D57 /* MIDISequencer.swift */; };
@@ -38,6 +40,7 @@
 		B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerStep.swift; sourceTree = "<group>"; };
 		B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerTrack.swift; sourceTree = "<group>"; };
 		B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerCallbackInstrument.swift; sourceTree = "<group>"; };
+		B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerArpeggiator.swift; sourceTree = "<group>"; };
 		B2EAA1981F67DC7000B80D57 /* MIDISequencer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDISequencer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EAA1A61F67DC7F00B80D57 /* MIDISequencer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDISequencer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EAA1AF1F67DCEA00B80D57 /* Info iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info iOS.plist"; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 				B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */,
 				B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */,
 				B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */,
+				B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -439,6 +443,7 @@
 				B2A730D31F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift in Sources */,
 				B2A730D11F6C81CF0040F34F /* MIDISequencerTrack.swift in Sources */,
 				B2A730CF1F6C81C30040F34F /* MIDISequencerStep.swift in Sources */,
+				B2A730D81F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */,
 				B2EAA1B91F67DD1D00B80D57 /* MIDISequencer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +455,7 @@
 				B2A730D61F6C82630040F34F /* MIDISequencerCallbackInstrument.swift in Sources */,
 				B2A730D51F6C82630040F34F /* MIDISequencerTrack.swift in Sources */,
 				B2A730D41F6C82630040F34F /* MIDISequencerStep.swift in Sources */,
+				B2A730D91F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */,
 				B2EAA1BA1F67DD1D00B80D57 /* MIDISequencer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

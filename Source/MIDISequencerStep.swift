@@ -38,6 +38,10 @@ public struct MIDISequencerStep {
   public var velocity: MIDISequencerStepVelocity
   /// Use that proprety to mute/unmute step.
   public var isMuted = false
+  /// Informs that if step is empty or not.
+  public var isEmpty: Bool {
+    return notes.isEmpty
+  }
 
   /// Creates muted, empty step.
   public init() {
