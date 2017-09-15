@@ -46,11 +46,9 @@ public struct MIDISequencerStep {
   /// Use that proprety to mute/unmute step.
   public var isMuted = false
 
-  /// Creates muted, empty step
+  /// Creates muted, empty step.
   public init() {
-    notes = []
-    noteValue = NoteValue(type: .quarter)
-    velocity = .standard(0)
+    self.init(notes: [], noteValue: NoteValue(type: .quarter), velocity: .standard(0))
     isMuted = true
   }
 
@@ -162,12 +160,10 @@ private class MIDISequencerCallbackInstrument: AKCallbackInstrument {
 
   override func start(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
     midi.sendNoteOnMessage(noteNumber: noteNumber, velocity: velocity, channel: channel)
-    print("note on \(noteNumber)")
   }
 
   override func stop(noteNumber: MIDINoteNumber, channel: MIDIChannel) {
     midi.sendNoteOffMessage(noteNumber: noteNumber, velocity: 0, channel: channel)
-    print("note off \(noteNumber)")
   }
 }
 
@@ -180,10 +176,10 @@ public class MIDISequencer {
   /// Global MIDI referance object.
   private let midi = AKMIDI()
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
-  private var sequencer: AKSequencer?
+  public private(set) var sequencer: AKSequencer?
 
   /// All tracks in sequencer.
-  public var tracks = [MIDISequencerTrack]() { didSet{ setupSequencer() }}
+  public var tracks = [MIDISequencerTrack]()
   /// Tempo (BPM) and time signature value of sequencer.
   public var tempo = Tempo(timeSignature: TimeSignature(beats: 4, noteValue: .quarter), bpm: 120) { didSet{ sequencer?.setTempo(tempo.bpm) }}
 
@@ -228,6 +224,16 @@ public class MIDISequencer {
   public func play() {
     setupSequencer()
     sequencer?.play()
+  }
+
+  /// Setups sequencer on background thread and starts playing it.
+  ///
+  /// - Parameter completion: Fires when setup complete. Useful to dismiss any loading state.
+  public func playAsync(completion: (() -> Void)? = nil) {
+    DispatchQueue.main.async {
+      self.play()
+      completion?()
+    }
   }
 
   /// Stops playing the sequence.

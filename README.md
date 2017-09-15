@@ -60,11 +60,12 @@ track.steps = [
 	  noteValue: NoteValue(type: .quarter),
 	  velocity: .standard(100)),
 	]
+sequencer.tracks.append(track)
 ```
 
 - You can even add chords or multiple notes or even both to any step.
 
-```
+``` swift
 MIDISequencerStep(
   chord: Chord(type: .maj, key: .c),
   octave: 4,
@@ -85,3 +86,17 @@ MIDISequencerStep(
 
 - Set `isMuted` property to `true` to mute any `MIDISequencerStep`.
 
+- Call one of `play()` or `playAsync()` functions to play sequance.
+
+``` swift
+state = .loading
+sequancer.playAsync(completion: {
+	self.state = .playing
+})
+```
+
+- Call `stop()` to stop playing.
+
+``` swift
+sequencer.stop()
+```
