@@ -30,23 +30,24 @@ public enum MIDISequencerStepNoteVelocity {
   }
 }
 
-public struct MIDISequencerStepNote {
-  public var note: Note
+public struct MIDISequencerStep {
+  public var notes: [Note]
   public var noteValue: NoteValue
   public var velocity: MIDISequencerStepNoteVelocity
 
-  public init(note: Note, noteValue: NoteValue, velocity: MIDISequencerStepNoteVelocity) {
-    self.note = note
+  public init(notes: [Note], noteValue: NoteValue, velocity: MIDISequencerStepNoteVelocity) {
+    self.notes = notes
     self.noteValue = noteValue
     self.velocity = velocity
   }
-}
 
-public indirect enum MIDISequencerStep {
-  case empty
-  case muted(step: MIDISequencerStep)
-  case step(notes: [MIDISequencerStepNote])
-  case continues(parent: MIDISequencerStep)
+  public init(note: Note, noteValue: NoteValue, velocity: MIDISequencerStepNoteVelocity) {
+    self.init(notes: [note], noteValue: noteValue, velocity: velocity)
+  }
+
+  public init(chord: Chord, octave: Int, noteValue: NoteValue, velocity: MIDISequencerStepNoteVelocity) {
+    self.init(notes: chord.notes(octave: octave), noteValue: noteValue, velocity: velocity)
+  }
 }
 
 public class MIDISequencerTrack {
@@ -129,18 +130,13 @@ public class MIDISequencer {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
       newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
       for (index, step) in track.steps.enumerated() {
-        switch step {
-        case .step(let notes):
-          for note in notes {
-            newTrack.add(
-              noteNumber: MIDINoteNumber(note.note.midiNote),
-              velocity: MIDIVelocity(note.velocity.velocity),
-              position: AKDuration(beats: Double(index)),
-              duration: AKDuration(seconds: tempo.duration(of: note.noteValue)),
-              channel: MIDIChannel(track.midiChannel))
-          }
-        default:
-          continue
+        for note in step.notes {
+          newTrack.add(
+            noteNumber: MIDINoteNumber(note.midiNote),
+            velocity: MIDIVelocity(step.velocity.velocity),
+            position: AKDuration(beats: Double(index)),
+            duration: AKDuration(seconds: tempo.duration(of: step.noteValue)),
+            channel: MIDIChannel(track.midiChannel))
         }
       }
     }

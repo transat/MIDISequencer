@@ -37,30 +37,37 @@ class ViewController: NSViewController {
     let track = MIDISequencerTrack(
       name: "Track 1",
       steps: [
-        .step(notes: [
-          MIDISequencerStepNote(
-            note: Note(type: .c, octave: 4),
-            noteValue: NoteValue(type: .quarter),
-            velocity: .standard(100))
-          ]),
-        .step(notes: [
-          MIDISequencerStepNote(
-            note: Note(type: .d, octave: 4),
-            noteValue: NoteValue(type: .quarter),
-            velocity: .standard(100))
-          ]),
-        .step(notes: [
-          MIDISequencerStepNote(
-            note: Note(type: .e, octave: 4),
-            noteValue: NoteValue(type: .quarter),
-            velocity: .standard(100))
-          ]),
-        .step(notes: [
-          MIDISequencerStepNote(
-            note: Note(type: .f, octave: 4),
-            noteValue: NoteValue(type: .quarter),
-            velocity: .standard(100))
-          ]),
+
+//        MIDISequencerStep(
+//          chord: Chord(type: .maj, key: .c),
+//          octave: 4,
+//          noteValue: NoteValue(type: .whole),
+//          velocity: .standard(100)),
+
+//        MIDISequencerStep(
+//          note: Note(type: .c, octave: 4),
+//          noteValue: NoteValue(type: .quarter),
+//          velocity: .standard(100)),
+
+        MIDISequencerStep(
+          notes: Chord(type: .maj, key: .c).notes(octave: 4) + [Note(type: .c, octave: 6)],
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(100)),
+
+        MIDISequencerStep(
+          note: Note(type: .d, octave: 4),
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(100)),
+
+        MIDISequencerStep(
+          note: Note(type: .e, octave: 4),
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(100)),
+
+        MIDISequencerStep(
+          note: Note(type: .f, octave: 4),
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(100)),
       ])
 
     sequencer.tracks.append(track)
