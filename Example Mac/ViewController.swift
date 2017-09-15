@@ -82,6 +82,7 @@ class ViewController: NSViewController {
           velocity: .standard(60)),
         ])
 
+    track1.steps[1].isMuted = true
     sequencer.tracks.append(track1)
     sequencer.tracks.append(track2)
   }

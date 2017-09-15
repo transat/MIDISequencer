@@ -34,6 +34,7 @@ public struct MIDISequencerStep {
   public var notes: [Note]
   public var noteValue: NoteValue
   public var velocity: MIDISequencerStepNoteVelocity
+  public var isMuted = false
 
   public init(notes: [Note], noteValue: NoteValue, velocity: MIDISequencerStepNoteVelocity) {
     self.notes = notes
@@ -134,6 +135,7 @@ public class MIDISequencer {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
       newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
       for (index, step) in track.steps.enumerated() {
+        if step.isMuted { continue }
         for note in step.notes {
           newTrack.add(
             noteNumber: MIDINoteNumber(note.midiNote),
