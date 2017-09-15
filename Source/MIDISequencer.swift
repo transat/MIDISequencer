@@ -14,12 +14,12 @@ import MusicTheorySwift
 public class MIDISequencer {
   /// Name of the sequencer.
   public private(set) var midiOutputName: String
-  /// MIDI callback instrument that sends MIDI events to other apps.
-  private var midiCallbackInstrument: MIDISequencerCallbackInstrument
-  /// Global MIDI referance object.
-  private let midi = AKMIDI()
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
   public private(set) var sequencer: AKSequencer?
+  /// Global MIDI referance object.
+  private let midi = AKMIDI()
+  /// MIDI callback instrument that sends MIDI events to other apps.
+  private var midiCallbackInstrument: MIDISequencerCallbackInstrument
 
   /// All tracks in sequencer.
   public var tracks = [MIDISequencerTrack]()
@@ -61,6 +61,20 @@ public class MIDISequencer {
 
     sequencer?.setTempo(tempo.bpm)
     sequencer?.enableLooping(AKDuration(beats: Double(tracks.map({ $0.steps.count }).sorted().first ?? 0)))
+  }
+
+  /// Adds a track to its `tracks`.
+  ///
+  /// - Parameter track: Track will be added.
+  public func addTrack(track: MIDISequencerTrack) {
+    tracks.append(track)
+  }
+
+  /// Removes a track from its `tracks` at index.
+  ///
+  /// - Parameter index: Index of track that will be removed.
+  public func removeTrack(at index: Int) {
+    tracks.remove(at: index)
   }
 
   /// Plays the sequence from begining.
