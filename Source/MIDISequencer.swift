@@ -81,9 +81,26 @@ public class MIDISequencerTrack {
   }
 }
 
+private class MIDISequencerCallbackInstrument: AKCallbackInstrument {
+  var midi: AKMIDI
+
+  init(midi: AKMIDI) {
+    self.midi = midi
+    super.init(callback: nil)
+  }
+
+  override func start(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
+    midi.sendNoteOnMessage(noteNumber: noteNumber, velocity: velocity, channel: channel)
+  }
+
+  override func stop(noteNumber: MIDINoteNumber, channel: MIDIChannel) {
+    midi.sendNoteOffMessage(noteNumber: noteNumber, velocity: 0, channel: channel)
+  }
+}
+
 public class MIDISequencer {
   public private(set) var midiOutputName: String
-  private var midiCallbackInstrument: AKCallbackInstrument
+  private var midiCallbackInstrument: MIDISequencerCallbackInstrument
   private let midi = AKMIDI()
   private let sequencer = AKSequencer()
 
@@ -97,10 +114,8 @@ public class MIDISequencer {
 
   public init(midiOutputName: String) {
     self.midiOutputName = midiOutputName
-    self.midiCallbackInstrument = AKCallbackInstrument(callback: nil)
-    self.midiCallbackInstrument.callback = midiCallback
+    midiCallbackInstrument = MIDISequencerCallbackInstrument(midi: midi)
     midi.createVirtualOutputPort(name: midiOutputName)
-    setupSequencer()
   }
 
   private func setupSequencer() {
@@ -109,62 +124,29 @@ public class MIDISequencer {
     currentStep = 0
     stepCount = tracks.map({ $0.steps.count }).sorted().first ?? 0
 
-    guard let track = sequencer.newTrack() else { return }
-    track.add(
-      noteNumber: 0,
-      velocity: 10,
-      position: AKDuration(beats: 0),
-      duration: AKDuration(seconds: tempo.duration(of: NoteValue(type: tempo.timeSignature.noteValue))))
-
-    sequencer.setGlobalMIDIOutput(midiCallbackInstrument.midiIn)
-    sequencer.setTempo(tempo.bpm)
-    sequencer.setLoopInfo(AKDuration(beats: 1), numberOfLoops: 0)
-    sequencer.tracks = [track]
-  }
-
-  private func midiCallback(status: AKMIDIStatus, noteNumber: MIDINoteNumber, velocity: MIDIVelocity) {
-
-    print("\(Date()) \(status) \(currentStep)")
-
-    switch status {
-    case .noteOn:
-      for track in tracks {
-        guard let step = track.steps[safe: currentStep] else { break }
+    sequencer.tracks = []
+    for track in tracks {
+      let newTrack = sequencer.newTrack(track.name)
+      newTrack?.setMIDIOutput(midiCallbackInstrument.midiIn)
+      for (index, step) in track.steps.enumerated() {
         switch step {
         case .step(let notes):
           for note in notes {
-            midi.sendNoteOnMessage(
+            newTrack?.add(
               noteNumber: MIDINoteNumber(note.note.midiNote),
               velocity: MIDIVelocity(note.velocity.velocity),
+              position: AKDuration(beats: Double(index)),
+              duration: AKDuration(seconds: tempo.duration(of: note.noteValue)),
               channel: MIDIChannel(track.midiChannel))
           }
         default:
-          break
-        }
-
-        currentStep += 1
-        if currentStep >= stepCount {
-          currentStep = 0
+          continue
         }
       }
-    case .noteOff:
-      for track in tracks {
-        guard let step: MIDISequencerStep = currentStep == 0 ? track.steps[safe: stepCount-1] : track.steps[safe: currentStep-1] else { return }
-        switch step {
-        case .step(let notes):
-          for note in notes {
-            midi.sendNoteOffMessage(
-              noteNumber: MIDINoteNumber(note.note.midiNote),
-              velocity: 0,
-              channel: MIDIChannel(track.midiChannel))
-          }
-        default:
-          break
-        }
-      }
-    default:
-      break
     }
+
+    sequencer.setTempo(tempo.bpm)
+    sequencer.setLoopInfo(AKDuration(beats: Double(stepCount)), numberOfLoops: 0)
   }
 
   public func play() {
