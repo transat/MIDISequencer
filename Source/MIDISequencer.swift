@@ -91,10 +91,12 @@ private class MIDISequencerCallbackInstrument: AKCallbackInstrument {
 
   override func start(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
     midi.sendNoteOnMessage(noteNumber: noteNumber, velocity: velocity, channel: channel)
+    print("note on \(noteNumber)")
   }
 
   override func stop(noteNumber: MIDINoteNumber, channel: MIDIChannel) {
     midi.sendNoteOffMessage(noteNumber: noteNumber, velocity: 0, channel: channel)
+    print("note off \(noteNumber)")
   }
 }
 
@@ -102,10 +104,10 @@ public class MIDISequencer {
   public private(set) var midiOutputName: String
   private var midiCallbackInstrument: MIDISequencerCallbackInstrument
   private let midi = AKMIDI()
-  private let sequencer = AKSequencer()
+  private var sequencer: AKSequencer?
 
   public var tracks = [MIDISequencerTrack]() { didSet{ setupSequencer() }}
-  public var tempo = Tempo(timeSignature: TimeSignature(beats: 4, noteValue: .quarter), bpm: 120) { didSet{ sequencer.setTempo(tempo.bpm) }}
+  public var tempo = Tempo(timeSignature: TimeSignature(beats: 4, noteValue: .quarter), bpm: 120) { didSet{ sequencer?.setTempo(tempo.bpm) }}
 
   /// Current step on sequencer
   private var currentStep = 0
@@ -119,20 +121,18 @@ public class MIDISequencer {
   }
 
   private func setupSequencer() {
-    sequencer.stop()
-    sequencer.preroll()
+    sequencer = AKSequencer()
     currentStep = 0
     stepCount = tracks.map({ $0.steps.count }).sorted().first ?? 0
 
-    sequencer.tracks = []
     for track in tracks {
-      let newTrack = sequencer.newTrack(track.name)
-      newTrack?.setMIDIOutput(midiCallbackInstrument.midiIn)
+      guard let newTrack = sequencer?.newTrack(track.name) else { continue }
+      newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
       for (index, step) in track.steps.enumerated() {
         switch step {
         case .step(let notes):
           for note in notes {
-            newTrack?.add(
+            newTrack.add(
               noteNumber: MIDINoteNumber(note.note.midiNote),
               velocity: MIDIVelocity(note.velocity.velocity),
               position: AKDuration(beats: Double(index)),
@@ -145,16 +145,17 @@ public class MIDISequencer {
       }
     }
 
-    sequencer.setTempo(tempo.bpm)
-    sequencer.setLoopInfo(AKDuration(beats: Double(stepCount)), numberOfLoops: 0)
+    sequencer?.setTempo(tempo.bpm)
+    sequencer?.enableLooping(AKDuration(beats: Double(stepCount)))
   }
 
   public func play() {
     setupSequencer()
-    sequencer.play()
+    sequencer?.play()
   }
 
   public func stop() {
-    sequencer.stop()
+    sequencer?.stop()
+    sequencer = nil
   }
 }
