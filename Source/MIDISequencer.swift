@@ -121,6 +121,10 @@ public class MIDISequencer {
     midi.createVirtualOutputPort(name: midiOutputName)
   }
 
+  deinit {
+    stop()
+  }
+
   private func setupSequencer() {
     sequencer = AKSequencer()
     currentStep = 0

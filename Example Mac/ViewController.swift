@@ -34,42 +34,55 @@ class ViewController: NSViewController {
     super.viewDidLoad()
     isPlaying = false
 
-    let track = MIDISequencerTrack(
+    let track1 = MIDISequencerTrack(
       name: "Track 1",
+      midiChannel: 1,
       steps: [
-
-//        MIDISequencerStep(
-//          chord: Chord(type: .maj, key: .c),
-//          octave: 4,
-//          noteValue: NoteValue(type: .whole),
-//          velocity: .standard(100)),
-
-//        MIDISequencerStep(
-//          note: Note(type: .c, octave: 4),
-//          noteValue: NoteValue(type: .quarter),
-//          velocity: .standard(100)),
-
         MIDISequencerStep(
-          notes: Chord(type: .maj, key: .c).notes(octave: 4) + [Note(type: .c, octave: 6)],
+          note: Note(type: .c, octave: 4),
           noteValue: NoteValue(type: .quarter),
           velocity: .standard(100)),
-
         MIDISequencerStep(
           note: Note(type: .d, octave: 4),
           noteValue: NoteValue(type: .quarter),
           velocity: .standard(100)),
-
         MIDISequencerStep(
           note: Note(type: .e, octave: 4),
           noteValue: NoteValue(type: .quarter),
           velocity: .standard(100)),
-
         MIDISequencerStep(
           note: Note(type: .f, octave: 4),
           noteValue: NoteValue(type: .quarter),
           velocity: .standard(100)),
       ])
 
-    sequencer.tracks.append(track)
+    let track2 = MIDISequencerTrack(
+      name: "Track 2",
+      midiChannel: 2,
+      steps: [
+        MIDISequencerStep(
+          chord: Chord(type: .maj, key: .c),
+          octave: 4,
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(60)),
+        MIDISequencerStep(
+          chord: Chord(type: .maj, key: .c),
+          octave: 4,
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(60)),
+        MIDISequencerStep(
+          chord: Chord(type: .min, key: .a),
+          octave: 4,
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(60)),
+        MIDISequencerStep(
+          chord: Chord(type: .min, key: .a),
+          octave: 4,
+          noteValue: NoteValue(type: .quarter),
+          velocity: .standard(60)),
+        ])
+
+    sequencer.tracks.append(track1)
+    sequencer.tracks.append(track2)
   }
 }
