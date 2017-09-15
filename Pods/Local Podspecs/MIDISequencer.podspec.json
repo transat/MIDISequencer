@@ -1,0 +1,28 @@
+{
+  "name": "MIDISequencer",
+  "version": "0.0.1",
+  "summary": "A short description of MIDISequencer.",
+  "description": "A short description of MIDISequencer..",
+  "homepage": "https://github.com/cemolcay/MIDISequencer",
+  "license": "MIT",
+  "authors": {
+    "cemolcay": "ccemolcay@gmail.com"
+  },
+  "platforms": {
+    "ios": "9.0",
+    "osx": "10.11"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Source/MIDISequencer.swift",
+  "requires_arc": true,
+  "dependencies": {
+    "AudioKit": [
+
+    ],
+    "MusicTheorySwift": [
+
+    ]
+  }
+}

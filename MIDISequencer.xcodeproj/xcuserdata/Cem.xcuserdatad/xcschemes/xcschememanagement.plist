@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Example Mac.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>MIDISequencer Mac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>B2EAA1A51F67DC7F00B80D57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2EAA1BE1F697A9000B80D57</key>
 		<dict>
 			<key>primary</key>
 			<true/>

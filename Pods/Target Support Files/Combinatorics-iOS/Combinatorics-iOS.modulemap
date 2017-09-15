@@ -1,6 +1,0 @@
-framework module Combinatorics {
-  umbrella header "Combinatorics-iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

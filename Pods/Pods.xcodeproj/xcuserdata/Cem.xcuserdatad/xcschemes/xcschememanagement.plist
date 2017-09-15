@@ -4,22 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Combinatorics-iOS.xcscheme</key>
+		<key>MIDISequencer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Combinatorics-macOS.xcscheme</key>
+		<key>MusicTheorySwift-iOS9.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MusicTheorySwift-iOS.xcscheme</key>
+		<key>MusicTheorySwift-macOS10.11.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MusicTheorySwift-macOS.xcscheme</key>
+		<key>MusicTheorySwift-macOS10.12.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Example Mac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>06A56DF576091690F83CFED4F16A2D55</key>
+		<key>21DC302C9C8B51709A90BA8E364AF4EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>13EA93550F442EB59486ACC14C46B448</key>
+		<key>395D6D7518330D59341E3909DAB0BBC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1508523D97EFE86E1CFA91722A16EF1A</key>
+		<key>3F2D8167ACDD1B067CD4C43BDD0CFC9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>45895217EF9C8EEBE616C148635694A0</key>
+		<key>4760F2CEDD66552575C0793C25A2B0C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>639FAF0E07F2D8497924160F78A048B6</key>
+		<key>707E4869C3452D98EC5939479DF61A13</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>64B773CD251069A9F532A0CA456C9192</key>
+		<key>81E01E2C95137976E52769D83D03996B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC9DEB108FA91A869F80D0EB14A1F777</key>
 		<dict>
 			<key>primary</key>
 			<true/>

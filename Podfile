@@ -2,17 +2,20 @@
 # platform :ios, '9.0'
 
 def shared_pods
+  use_frameworks!
   pod 'MusicTheorySwift'
   pod 'AudioKit'
-  pod 'Combinatorics'
 end
 
 target 'MIDISequencer iOS' do
-  use_frameworks!
   shared_pods
 end
 
 target 'MIDISequencer Mac' do
-  use_frameworks!
   shared_pods
+end
+
+target 'Example Mac' do
+  use_frameworks!
+  pod 'MIDISequencer', :path => '.'
 end

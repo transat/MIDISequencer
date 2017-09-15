@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "395D6D7518330D59341E3909DAB0BBC4"
-               BuildableName = "Pods_MIDISequencer_iOS.framework"
-               BlueprintName = "Pods-MIDISequencer iOS"
+               BlueprintIdentifier = "707E4869C3452D98EC5939479DF61A13"
+               BuildableName = "MusicTheorySwift.framework"
+               BlueprintName = "MusicTheorySwift-macOS10.12"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "395D6D7518330D59341E3909DAB0BBC4"
-            BuildableName = "Pods_MIDISequencer_iOS.framework"
-            BlueprintName = "Pods-MIDISequencer iOS"
+            BlueprintIdentifier = "707E4869C3452D98EC5939479DF61A13"
+            BuildableName = "MusicTheorySwift.framework"
+            BlueprintName = "MusicTheorySwift-macOS10.12"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

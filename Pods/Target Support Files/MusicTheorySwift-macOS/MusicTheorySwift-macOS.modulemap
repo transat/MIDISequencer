@@ -1,6 +1,0 @@
-framework module MusicTheorySwift {
-  umbrella header "MusicTheorySwift-macOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

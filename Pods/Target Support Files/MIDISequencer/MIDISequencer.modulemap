@@ -1,0 +1,6 @@
+framework module MIDISequencer {
+  umbrella header "MIDISequencer-umbrella.h"
+
+  export *
+  module * { export * }
+}

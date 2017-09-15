@@ -1,0 +1,6 @@
+framework module MusicTheorySwift {
+  umbrella header "MusicTheorySwift-iOS9.0-umbrella.h"
+
+  export *
+  module * { export * }
+}
