@@ -36,6 +36,7 @@ let sequencer = MIDISequencer(name: "Awesome Sequencer")
 let track = MIDISequencerTrack(
 	name: "Track 1", 
 	midiChannel: 1)
+sequencer.tracks.append(track)
 ```
 
 - Add some `MIDISequencerStep`s to track's `steps`
