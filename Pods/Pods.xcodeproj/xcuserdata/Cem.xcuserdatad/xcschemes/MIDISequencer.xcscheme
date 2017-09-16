@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '4760F2CEDD66552575C0793C25A2B0C8'
+               BlueprintIdentifier = 'C038EC94ED5E0AEE1183D43434037FAC'
                BlueprintName = 'MIDISequencer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MIDISequencer.framework'>

@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		6D00FC4709D760F286424A4B /* Pods_Example_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA54536AD5A9AE0DDA2D5A /* Pods_Example_Mac.framework */; };
 		95853173C83D45EDCFFF3140 /* Pods_MIDISequencer_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B877D8B17B8229E444C02EE /* Pods_MIDISequencer_Mac.framework */; };
-		B2EAA1B21F67DCEA00B80D57 /* Info iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2EAA1AF1F67DCEA00B80D57 /* Info iOS.plist */; };
-		B2EAA1B31F67DCEA00B80D57 /* Info iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2EAA1AF1F67DCEA00B80D57 /* Info iOS.plist */; };
-		B2EAA1B41F67DCEA00B80D57 /* Info Mac.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2EAA1B01F67DCEA00B80D57 /* Info Mac.plist */; };
-		B2EAA1B51F67DCEA00B80D57 /* Info Mac.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2EAA1B01F67DCEA00B80D57 /* Info Mac.plist */; };
+		B2A730CF1F6C81C30040F34F /* MIDISequencerStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */; };
+		B2A730D11F6C81CF0040F34F /* MIDISequencerTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */; };
+		B2A730D31F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */; };
+		B2A730D41F6C82630040F34F /* MIDISequencerStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */; };
+		B2A730D51F6C82630040F34F /* MIDISequencerTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */; };
+		B2A730D61F6C82630040F34F /* MIDISequencerCallbackInstrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */; };
+		B2A730D81F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */; };
+		B2A730D91F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */; };
 		B2EAA1B61F67DCEA00B80D57 /* MIDISequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2EAA1B11F67DCEA00B80D57 /* MIDISequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2EAA1B71F67DCEA00B80D57 /* MIDISequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2EAA1B11F67DCEA00B80D57 /* MIDISequencer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2EAA1B91F67DD1D00B80D57 /* MIDISequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EAA1B81F67DD1D00B80D57 /* MIDISequencer.swift */; };
@@ -33,6 +37,10 @@
 		3C08AC4183267F180B5501A3 /* Pods-MIDISequencer Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MIDISequencer Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MIDISequencer Mac/Pods-MIDISequencer Mac.debug.xcconfig"; sourceTree = "<group>"; };
 		61FA54536AD5A9AE0DDA2D5A /* Pods_Example_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B877D8B17B8229E444C02EE /* Pods_MIDISequencer_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MIDISequencer_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerStep.swift; sourceTree = "<group>"; };
+		B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerTrack.swift; sourceTree = "<group>"; };
+		B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerCallbackInstrument.swift; sourceTree = "<group>"; };
+		B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerArpeggiator.swift; sourceTree = "<group>"; };
 		B2EAA1981F67DC7000B80D57 /* MIDISequencer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDISequencer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EAA1A61F67DC7F00B80D57 /* MIDISequencer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDISequencer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EAA1AF1F67DCEA00B80D57 /* Info iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info iOS.plist"; sourceTree = "<group>"; };
@@ -114,6 +122,10 @@
 				B2EAA1B01F67DCEA00B80D57 /* Info Mac.plist */,
 				B2EAA1B11F67DCEA00B80D57 /* MIDISequencer.h */,
 				B2EAA1B81F67DD1D00B80D57 /* MIDISequencer.swift */,
+				B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */,
+				B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */,
+				B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */,
+				B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -278,8 +290,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2EAA1B21F67DCEA00B80D57 /* Info iOS.plist in Resources */,
-				B2EAA1B41F67DCEA00B80D57 /* Info Mac.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,8 +297,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2EAA1B31F67DCEA00B80D57 /* Info iOS.plist in Resources */,
-				B2EAA1B51F67DCEA00B80D57 /* Info Mac.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +440,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A730D31F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift in Sources */,
+				B2A730D11F6C81CF0040F34F /* MIDISequencerTrack.swift in Sources */,
+				B2A730CF1F6C81C30040F34F /* MIDISequencerStep.swift in Sources */,
+				B2A730D81F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */,
 				B2EAA1B91F67DD1D00B80D57 /* MIDISequencer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +452,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A730D61F6C82630040F34F /* MIDISequencerCallbackInstrument.swift in Sources */,
+				B2A730D51F6C82630040F34F /* MIDISequencerTrack.swift in Sources */,
+				B2A730D41F6C82630040F34F /* MIDISequencerStep.swift in Sources */,
+				B2A730D91F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */,
 				B2EAA1BA1F67DD1D00B80D57 /* MIDISequencer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,8 +11,8 @@ import MIDISequencer
 import MusicTheorySwift
 
 class ViewController: NSViewController {
-  let sequencer = MIDISequencer(midiOutputName: "Baby Steps")
   @IBOutlet weak var toggleButton: NSButton?
+  let sequencer = MIDISequencer(midiOutputName: "Baby Steps")
 
   var isPlaying = false {
     didSet {
@@ -33,7 +33,10 @@ class ViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     isPlaying = false
+    arpeggiatorExample()
+  }
 
+  func sequencerExample() {
     let track1 = MIDISequencerTrack(
       name: "Track 1",
       midiChannel: 1)
@@ -83,8 +86,24 @@ class ViewController: NSViewController {
           velocity: .standard(60)),
         ])
 
-    track1.steps[1].isMuted = true
     sequencer.tracks.append(track1)
     sequencer.tracks.append(track2)
+  }
+
+  func arpeggiatorExample() {
+    let arpeggiator = MIDISequencerArpeggiator(
+      chord: Chord(type: .maj, key: .c),
+      arpeggio: .random,
+      octaves: [4, 5])
+
+    let track = MIDISequencerTrack(
+      name: "Arp Track",
+      midiChannel: 1,
+      steps: arpeggiator.steps(
+        noteValue: NoteValue(type: .sixtenth),
+        velocity: .standard(100)))
+
+    sequencer.addTrack(track: track)
+    sequencer.tempo = Tempo(timeSignature: TimeSignature(beats: 4, noteValue: .quarter), bpm: 120)
   }
 }
