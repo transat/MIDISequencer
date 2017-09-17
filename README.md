@@ -84,6 +84,22 @@ MIDISequencerStep(
   velocity: .standard(60))
 ```
 
+- Create arpeggiated steps with any notes from chords, scales in any octave range with `MIDISequencerArpeggiator`.
+
+``` swift
+let arpeggiator = MIDISequencerArpeggiator(
+  scale: Scale(type: .blues, key: .a),
+  arpeggio: .random,
+  octaves: [4, 5])
+
+let melody = MIDISequencerTrack(
+  name: "Melody",
+  midiChannel: 3,
+  steps: arpeggiator.steps(noteValue: NoteValue(type: .quarter), velocity: .random(min: 80, max: 120)))
+
+sequencer.addTrack(track: melody)
+```
+
 - Set `isMuted` property to `true` to mute any `MIDISequencerStep`.
 
 - Call one of `play()` or `playAsync()` functions to play sequance.
