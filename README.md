@@ -39,6 +39,16 @@ let track = MIDISequencerTrack(
 sequencer.tracks.append(track)
 ```
 
+- Set tempo and time signature
+
+``` swift
+sequencer.tempo = Tempo(
+  timeSignature: TimeSignature(
+    beats: 4,
+    noteValue: .quarter),
+  bpm: 80)
+```
+
 - Add some `MIDISequencerStep`s to track's `steps`
 
 ``` swift
