@@ -60,7 +60,7 @@ track.steps = [
 	  noteValue: NoteValue(type: .quarter),
 	  velocity: .standard(100)),
 	]
-sequencer.tracks.append(track)
+sequencer.addTrack(track: track1)
 ```
 
 - You can even add chords or multiple notes or even both to any step.

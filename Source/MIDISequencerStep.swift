@@ -82,3 +82,22 @@ public struct MIDISequencerStep {
     self.init(notes: chord.notes(octave: octave), noteValue: noteValue, velocity: velocity)
   }
 }
+
+extension Collection where Iterator.Element == MIDISequencerStep {
+
+  /// Calculates and returns the minimum beat value from `MIDISequencerStep`'s `NoteValues`.
+  public var minimumBeats: Double? {
+    if isEmpty {
+      return nil
+    }
+    return 1.0 / (map({ $0.noteValue.type.beats }).sorted().first ?? 1)
+  }
+
+  /// Calculates and returns the maximum beat value from `MIDISequencerStep`'s `NoteValues`.
+  public var maximumBeats: Double? {
+    if isEmpty {
+      return nil
+    }
+    return 1.0 / (map({ $0.noteValue.type.beats }).sorted().last ?? 1)
+  }
+}
