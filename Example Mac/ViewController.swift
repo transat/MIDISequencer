@@ -46,7 +46,11 @@ class ViewController: NSViewController {
       steps: [
         MIDISequencerStep(
           note: Note(type: .a, octave: 3), 
-          noteValue: NoteValue(type: .whole),
+          noteValue: NoteValue(type: .half),
+          velocity: bassVolume),
+        MIDISequencerStep(
+          note: Note(type: .a, octave: 3),
+          noteValue: NoteValue(type: .half),
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .d, octave: 3),
@@ -82,7 +86,12 @@ class ViewController: NSViewController {
         MIDISequencerStep(
           chord: Chord(type: .min, key: .a),
           octave: 4,
-          noteValue: NoteValue(type: .whole),
+          noteValue: NoteValue(type: .half),
+          velocity: chordsVolume),
+        MIDISequencerStep(
+          chord: Chord(type: .min, key: .a),
+          octave: 4,
+          noteValue: NoteValue(type: .half),
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .d),
