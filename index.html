@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MIDISequencer  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="MIDISequencer  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">MIDISequencer Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/cemolcay/MIDISequencer"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">MIDISequencer Reference</a>
+        <img id="carat" src="img/carat.png" />
+        MIDISequencer  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/MIDISequencer.html">MIDISequencer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MIDISequencerCallbackInstrument.html">MIDISequencerCallbackInstrument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MIDISequencerTrack.html">MIDISequencerTrack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/MIDISequencerArpeggio.html">MIDISequencerArpeggio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/MIDISequencerStepVelocity.html">MIDISequencerStepVelocity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MIDISequencerStep.html">MIDISequencerStep</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#midisequencer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='midisequencer'>MIDISequencer</h1>
+
+<p>MIDI Sequencer that sends MIDI events to other apps.<br>
+Built top on <a href="https://github.com/AudioKit/AudioKit/blob/master/AudioKit/Common/MIDI/Sequencer/AKSequencer.swift"><code>AKSequencer</code></a> of <a href="https://github.com/AudioKit/AudioKit">AudioKit</a> for iOS and macOS.<br>
+Create smart MIDI sequencer instruments with just focus on notes.</p>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<ul>
+<li>Swift 3.0+</li>
+<li>iOS 9.0+</li>
+<li>macOS 10.11+</li>
+</ul>
+<a href='#install' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='install'>Install</h2>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'MIDISequencer'</span>
+</code></pre>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+
+<p>MIDISequencer built top on <code>AudioKit</code>&rsquo;s <code>AKSequencer</code> with <a href="https://github.com/cemolcay/MusicTheory"><code>MusicTheory</code></a> library to create sequences just focusing on notes with multiple track support.</p>
+
+<ul>
+<li>Create a <code>MIDISequencer</code> instance.<br></li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequencer</span> <span class="o">=</span> <span class="kt">MIDISequencer</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Awesome Sequencer"</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Create a <code>MIDISequencerTrack</code> and add it to sequencer&rsquo;s tracks.<br></li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">track</span> <span class="o">=</span> <span class="kt">MIDISequencerTrack</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"Track 1"</span><span class="p">,</span> 
+    <span class="nv">midiChannel</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sequencer</span><span class="o">.</span><span class="n">tracks</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Set tempo and time signature</li>
+</ul>
+<pre class="highlight swift"><code><span class="n">sequencer</span><span class="o">.</span><span class="n">tempo</span> <span class="o">=</span> <span class="kt">Tempo</span><span class="p">(</span>
+  <span class="nv">timeSignature</span><span class="p">:</span> <span class="kt">TimeSignature</span><span class="p">(</span>
+    <span class="nv">beats</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nv">noteValue</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+  <span class="nv">bpm</span><span class="p">:</span> <span class="mi">80</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>Add some <code>MIDISequencerStep</code>s to track&rsquo;s <code>steps</code></li>
+</ul>
+<pre class="highlight swift"><code><span class="n">track</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kt">MIDISequencerStep</span><span class="p">(</span>
+      <span class="nv">note</span><span class="p">:</span> <span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span>
+      <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+      <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">100</span><span class="p">)),</span>
+    <span class="kt">MIDISequencerStep</span><span class="p">(</span>
+      <span class="nv">note</span><span class="p">:</span> <span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span>
+      <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+      <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">100</span><span class="p">)),</span>
+    <span class="kt">MIDISequencerStep</span><span class="p">(</span>
+      <span class="nv">note</span><span class="p">:</span> <span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span>
+      <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+      <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">100</span><span class="p">)),</span>
+    <span class="kt">MIDISequencerStep</span><span class="p">(</span>
+      <span class="nv">note</span><span class="p">:</span> <span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span>
+      <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+      <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">100</span><span class="p">)),</span>
+    <span class="p">]</span>
+<span class="n">sequencer</span><span class="o">.</span><span class="nf">addTrack</span><span class="p">(</span><span class="nv">track</span><span class="p">:</span> <span class="n">track1</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li>You can even add chords or multiple notes or even both to any step.</li>
+</ul>
+<pre class="highlight swift"><code><span class="kt">MIDISequencerStep</span><span class="p">(</span>
+  <span class="nv">chord</span><span class="p">:</span> <span class="kt">Chord</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">maj</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="o">.</span><span class="n">c</span><span class="p">),</span>
+  <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+  <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+
+<span class="kt">MIDISequencerStep</span><span class="p">(</span>
+  <span class="nv">notes</span><span class="p">:</span> <span class="p">[</span><span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span> <span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">)],</span>
+  <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+  <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+
+<span class="kt">MIDISequencerStep</span><span class="p">(</span>
+  <span class="nv">notes</span><span class="p">:</span> <span class="kt">Chord</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">maj</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="o">.</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="nf">notes</span><span class="p">(</span><span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">),</span> <span class="kt">Note</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="nv">octave</span><span class="p">:</span> <span class="mi">4</span><span class="p">)],</span>
+  <span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span>
+  <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">standard</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+</code></pre>
+
+<ul>
+<li>Create arpeggiated steps with any notes from chords, scales in any octave range with <code>MIDISequencerArpeggiator</code>.</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">arpeggiator</span> <span class="o">=</span> <span class="kt">MIDISequencerArpeggiator</span><span class="p">(</span>
+  <span class="nv">scale</span><span class="p">:</span> <span class="kt">Scale</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">blues</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="o">.</span><span class="n">a</span><span class="p">),</span>
+  <span class="nv">arpeggio</span><span class="p">:</span> <span class="o">.</span><span class="n">random</span><span class="p">,</span>
+  <span class="nv">octaves</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="k">let</span> <span class="nv">melody</span> <span class="o">=</span> <span class="kt">MIDISequencerTrack</span><span class="p">(</span>
+  <span class="nv">name</span><span class="p">:</span> <span class="s">"Melody"</span><span class="p">,</span>
+  <span class="nv">midiChannel</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nv">steps</span><span class="p">:</span> <span class="n">arpeggiator</span><span class="o">.</span><span class="nf">steps</span><span class="p">(</span><span class="nv">noteValue</span><span class="p">:</span> <span class="kt">NoteValue</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span> <span class="nv">velocity</span><span class="p">:</span> <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">min</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="nv">max</span><span class="p">:</span> <span class="mi">120</span><span class="p">)))</span>
+
+<span class="n">sequencer</span><span class="o">.</span><span class="nf">addTrack</span><span class="p">(</span><span class="nv">track</span><span class="p">:</span> <span class="n">melody</span><span class="p">)</span>
+</code></pre>
+
+<ul>
+<li><p>Set <code>isMuted</code> property to <code>true</code> to mute any <code>MIDISequencerStep</code>.</p></li>
+<li><p>Call one of <code>play()</code> or <code>playAsync()</code> functions to play sequance.</p></li>
+</ul>
+<pre class="highlight swift"><code><span class="n">state</span> <span class="o">=</span> <span class="o">.</span><span class="n">loading</span>
+<span class="n">sequancer</span><span class="o">.</span><span class="nf">playAsync</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="o">.</span><span class="n">playing</span>
+<span class="p">})</span>
+</code></pre>
+
+<ul>
+<li>Call <code>stop()</code> to stop playing.</li>
+</ul>
+<pre class="highlight swift"><code><span class="n">sequencer</span><span class="o">.</span><span class="nf">stop</span><span class="p">()</span>
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-09-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

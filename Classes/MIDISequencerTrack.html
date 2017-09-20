@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MIDISequencerTrack Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MIDISequencerTrack" class="dashAnchor"></a>
+    <a title="MIDISequencerTrack Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MIDISequencer Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/cemolcay/MIDISequencer"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MIDISequencer Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MIDISequencerTrack Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencer.html">MIDISequencer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencerCallbackInstrument.html">MIDISequencerCallbackInstrument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencerTrack.html">MIDISequencerTrack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MIDISequencerArpeggio.html">MIDISequencerArpeggio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MIDISequencerStepVelocity.html">MIDISequencerStepVelocity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MIDISequencerTrack</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencerTrack</span></code></pre>
+
+                </div>
+              </div>
+            <p>A track that has <code><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></code>s in <code><a href="../Classes/MIDISequencer.html">MIDISequencer</a></code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer18MIDISequencerTrack4nameSS"></a>
+                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer18MIDISequencerTrack4nameSS">name</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Name of track.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer18MIDISequencerTrack11midiChannelSi"></a>
+                    <a name="//apple_ref/swift/Property/midiChannel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer18MIDISequencerTrack11midiChannelSi">midiChannel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>MIDI Channel of track to send notes to.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">midiChannel</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer18MIDISequencerTrack5stepsGSaVS_17MIDISequencerStep_"></a>
+                    <a name="//apple_ref/swift/Property/steps" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer18MIDISequencerTrack5stepsGSaVS_17MIDISequencerStep_">steps</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Steps in track.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">steps</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer18MIDISequencerTrackcFT4nameSS11midiChannelSi5stepsGSaVS_17MIDISequencerStep__S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(name:midiChannel:steps:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer18MIDISequencerTrackcFT4nameSS11midiChannelSi5stepsGSaVS_17MIDISequencerStep__S0_">init(name:midiChannel:steps:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initilizes the track with name and optional channel and steps properties. You can always change its steps and channel after created it.</p>
+
+<ul>
+<li>Parameters:
+
+<ul>
+<li>name: Name of track.</li>
+<li>midiChannel: Channel of track to send notes to. Defaults 0.</li>
+<li>steps: Steps in track. Defaults empty.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">midiChannel</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">steps</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of track.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>midiChannel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Channel of track to send notes to. Defaults 0.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>steps</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Steps in track. Defaults empty.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer18MIDISequencerTrack7addNextFT4stepVS_17MIDISequencerStep_T_"></a>
+                    <a name="//apple_ref/swift/Method/addNext(step:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer18MIDISequencerTrack7addNextFT4stepVS_17MIDISequencerStep_T_">addNext(step:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds step at the end of sequence.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter step: Step to add to end of sequence.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addNext</span><span class="p">(</span><span class="nv">step</span><span class="p">:</span> <span class="kt"><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>step</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Step to add to end of sequence.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer18MIDISequencerTrack3addFT4stepVS_17MIDISequencerStep2atSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/add(step:at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer18MIDISequencerTrack3addFT4stepVS_17MIDISequencerStep2atSi_T_">add(step:at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a step to sequence at index.</p>
+
+<ul>
+<li>Parameters:
+
+<ul>
+<li>step: Step to add to sequence.</li>
+<li>index: Index of step to add.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">step</span><span class="p">:</span> <span class="kt"><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>step</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Step to add to sequence.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Index of step to add.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer18MIDISequencerTrack3addFT5stepsGSaVS_17MIDISequencerStep_2atSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/add(steps:at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer18MIDISequencerTrack3addFT5stepsGSaVS_17MIDISequencerStep_2atSi_T_">add(steps:at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds multiple steps to sequence at index.</p>
+
+<ul>
+<li>Parameters:
+
+<ul>
+<li>steps: Steps to add to sequence.</li>
+<li>index: Inserting index to sequence. Defaults 0.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">steps</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></span><span class="p">],</span> <span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>steps</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Steps to add to sequence.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Inserting index to sequence. Defaults 0.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer18MIDISequencerTrack6removeFT2atSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/remove(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer18MIDISequencerTrack6removeFT2atSi_T_">remove(at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes a step at index.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter index: Index of step to remove.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Index of step to remove.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer18MIDISequencerTrack5clearFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/clear()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer18MIDISequencerTrack5clearFT_T_">clear()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove all steps.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">clear</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-09-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

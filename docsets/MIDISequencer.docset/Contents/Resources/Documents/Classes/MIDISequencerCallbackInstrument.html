@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MIDISequencerCallbackInstrument Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MIDISequencerCallbackInstrument" class="dashAnchor"></a>
+    <a title="MIDISequencerCallbackInstrument Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MIDISequencer Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/cemolcay/MIDISequencer"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MIDISequencer Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MIDISequencerCallbackInstrument Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencer.html">MIDISequencer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencerCallbackInstrument.html">MIDISequencerCallbackInstrument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencerTrack.html">MIDISequencerTrack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MIDISequencerArpeggio.html">MIDISequencerArpeggio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MIDISequencerStepVelocity.html">MIDISequencerStepVelocity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MIDISequencerCallbackInstrument</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencerCallbackInstrument</span><span class="p">:</span> <span class="kt">AKCallbackInstrument</span></code></pre>
+
+                </div>
+              </div>
+            <p>MIDI callback instrument that sends MIDI events in <code>AKSequencer</code> to other apps.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer31MIDISequencerCallbackInstrument4midiC8AudioKit6AKMIDI"></a>
+                    <a name="//apple_ref/swift/Property/midi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer31MIDISequencerCallbackInstrument4midiC8AudioKit6AKMIDI">midi</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Global MIDI referance to broadcast MIDI callbacks from <code><a href="../Classes/MIDISequencer.html">MIDISequencer</a></code> to other apps.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">midi</span><span class="p">:</span> <span class="kt">AKMIDI</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer31MIDISequencerCallbackInstrumentcFT4midiC8AudioKit6AKMIDI_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(midi:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer31MIDISequencerCallbackInstrumentcFT4midiC8AudioKit6AKMIDI_S0_">init(midi:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initilizes the instrument with global MIDI referance.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter midi: MIDI reference in <code>MIDISequnecer</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">midi</span><span class="p">:</span> <span class="kt">AKMIDI</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>midi</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI reference in <code>MIDISequnecer</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer31MIDISequencerCallbackInstrument5startFT10noteNumberVs5UInt88velocityS1_7channelS1__T_"></a>
+                    <a name="//apple_ref/swift/Method/start(noteNumber:velocity:channel:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer31MIDISequencerCallbackInstrument5startFT10noteNumberVs5UInt88velocityS1_7channelS1__T_">start(noteNumber:velocity:channel:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initilizes the instrument with global MIDI referance.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter midi: MIDI reference in <code>MIDISequnecer</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">noteNumber</span><span class="p">:</span> <span class="kt">MIDINoteNumber</span><span class="p">,</span> <span class="nv">velocity</span><span class="p">:</span> <span class="kt">MIDIVelocity</span><span class="p">,</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">MIDIChannel</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>noteNumber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI Note Number being started</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>velocity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI Velocity (0-127)</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>channel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI Channel</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer31MIDISequencerCallbackInstrument4stopFT10noteNumberVs5UInt87channelS1__T_"></a>
+                    <a name="//apple_ref/swift/Method/stop(noteNumber:channel:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer31MIDISequencerCallbackInstrument4stopFT10noteNumberVs5UInt87channelS1__T_">stop(noteNumber:channel:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initilizes the instrument with global MIDI referance.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter midi: MIDI reference in <code>MIDISequnecer</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">stop</span><span class="p">(</span><span class="nv">noteNumber</span><span class="p">:</span> <span class="kt">MIDINoteNumber</span><span class="p">,</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">MIDIChannel</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>noteNumber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI Note Number being stopped</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>velocity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI Velocity (0-127)</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>channel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIDI Channel</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-09-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

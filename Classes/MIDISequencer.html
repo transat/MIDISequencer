@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MIDISequencer Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MIDISequencer" class="dashAnchor"></a>
+    <a title="MIDISequencer Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MIDISequencer Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/cemolcay/MIDISequencer"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MIDISequencer Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MIDISequencer Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencer.html">MIDISequencer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencerCallbackInstrument.html">MIDISequencerCallbackInstrument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MIDISequencerTrack.html">MIDISequencerTrack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MIDISequencerArpeggio.html">MIDISequencerArpeggio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MIDISequencerStepVelocity.html">MIDISequencerStepVelocity</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MIDISequencer</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencer</span></code></pre>
+
+                </div>
+              </div>
+            <p>Sequencer with multiple tracks and multiple channels to broadcast MIDI sequences other apps.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer13MIDISequencer14midiOutputNameSS"></a>
+                    <a name="//apple_ref/swift/Property/midiOutputName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer13MIDISequencer14midiOutputNameSS">midiOutputName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Name of the sequencer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">midiOutputName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer13MIDISequencer9sequencerGSqC8AudioKit11AKSequencer_"></a>
+                    <a name="//apple_ref/swift/Property/sequencer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer13MIDISequencer9sequencerGSqC8AudioKit11AKSequencer_">sequencer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sequencer that sequences the <code><a href="../Structs/MIDISequencerStep.html">MIDISequencerStep</a></code>s in each <code><a href="../Classes/MIDISequencerTrack.html">MIDISequencerTrack</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">sequencer</span><span class="p">:</span> <span class="kt">AKSequencer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer13MIDISequencer6tracksGSaCS_18MIDISequencerTrack_"></a>
+                    <a name="//apple_ref/swift/Property/tracks" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer13MIDISequencer6tracksGSaCS_18MIDISequencerTrack_">tracks</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>All tracks in sequencer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tracks</span> <span class="o">=</span> <span class="p">[</span><span class="kt"><a href="../Classes/MIDISequencerTrack.html">MIDISequencerTrack</a></span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC13MIDISequencer13MIDISequencer5tempoERR"></a>
+                    <a name="//apple_ref/swift/Property/tempo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC13MIDISequencer13MIDISequencer5tempoERR">tempo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tempo (BPM) and time signature value of sequencer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tempo</span> <span class="o">=</span> <span class="kt">Tempo</span><span class="p">(</span><span class="nv">timeSignature</span><span class="p">:</span> <span class="kt">TimeSignature</span><span class="p">(</span><span class="nv">beats</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nv">noteValue</span><span class="p">:</span> <span class="o">.</span><span class="n">quarter</span><span class="p">),</span> <span class="nv">bpm</span><span class="p">:</span> <span class="mi">120</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer13MIDISequencercFT14midiOutputNameSS_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(midiOutputName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer13MIDISequencercFT14midiOutputNameSS_S0_">init(midiOutputName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initilizes the sequencer with its name.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter midiOutputName: Name of sequencer that seen by other apps.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">midiOutputName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>midiOutputName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of sequencer that seen by other apps.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer13MIDISequencer8addTrackFT5trackCS_18MIDISequencerTrack_T_"></a>
+                    <a name="//apple_ref/swift/Method/addTrack(track:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer13MIDISequencer8addTrackFT5trackCS_18MIDISequencerTrack_T_">addTrack(track:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a track to its <code><a href="../Classes/MIDISequencer.html#/s:vC13MIDISequencer13MIDISequencer6tracksGSaCS_18MIDISequencerTrack_">tracks</a></code>.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter track: Track will be added.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addTrack</span><span class="p">(</span><span class="nv">track</span><span class="p">:</span> <span class="kt"><a href="../Classes/MIDISequencerTrack.html">MIDISequencerTrack</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>track</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Track will be added.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer13MIDISequencer11removeTrackFT2atSi_T_"></a>
+                    <a name="//apple_ref/swift/Method/removeTrack(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer13MIDISequencer11removeTrackFT2atSi_T_">removeTrack(at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes a track from its <code><a href="../Classes/MIDISequencer.html#/s:vC13MIDISequencer13MIDISequencer6tracksGSaCS_18MIDISequencerTrack_">tracks</a></code> at index.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter index: Index of track that will be removed.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeTrack</span><span class="p">(</span><span class="n">at</span> <span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Index of track that will be removed.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer13MIDISequencer4playFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/play()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer13MIDISequencer4playFT_T_">play()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Plays the sequence from begining.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">play</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer13MIDISequencer9playAsyncFT10completionGSqFT_T___T_"></a>
+                    <a name="//apple_ref/swift/Method/playAsync(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer13MIDISequencer9playAsyncFT10completionGSqFT_T___T_">playAsync(completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Setups sequencer on background thread and starts playing it.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter completion: Fires when setup complete. Useful to dismiss any loading state.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">playAsync</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Fires when setup complete. Useful to dismiss any loading state.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC13MIDISequencer13MIDISequencer4stopFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/stop()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC13MIDISequencer13MIDISequencer4stopFT_T_">stop()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops playing the sequence.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stop</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-09-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
