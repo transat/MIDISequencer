@@ -126,3 +126,8 @@ sequancer.playAsync(completion: {
 ``` swift
 sequencer.stop()
 ```
+
+Documentation
+----
+
+See full [documentation](https://cemolcay.github.io/MIDISequencer)
