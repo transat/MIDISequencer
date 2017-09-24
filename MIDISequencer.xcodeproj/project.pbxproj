@@ -122,8 +122,8 @@
 				B2EAA1B01F67DCEA00B80D57 /* Info Mac.plist */,
 				B2EAA1B11F67DCEA00B80D57 /* MIDISequencer.h */,
 				B2EAA1B81F67DD1D00B80D57 /* MIDISequencer.swift */,
-				B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */,
 				B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */,
+				B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */,
 				B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */,
 				B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */,
 			);

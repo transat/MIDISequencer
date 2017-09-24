@@ -31,7 +31,7 @@ public struct MIDISequencerArpeggiator {
   /// Octave range of arpeggiator.
   public var octaves: [Int]
 
-  /// Initilizes arpeggiator with notes, arpeggio style and octave range.
+  /// Initilizes arpeggiator with same note in octave range with arpeggio style.
   ///
   /// - Parameters:
   ///   - note: Notes will be arpeggiated.
@@ -39,6 +39,18 @@ public struct MIDISequencerArpeggiator {
   ///   - octaves: Octave range of notes.
   public init(note: NoteType, arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
     self.notes = [note]
+    self.arpeggio = arpeggio
+    self.octaves = octaves
+  }
+
+  /// Initilizes arpeggiator with notes in octave range with arpeggio style.
+  ///
+  /// - Parameters:
+  ///   - note: Notes will be arpeggiated.
+  ///   - arpeggio: Arpeggio style.
+  ///   - octaves: Octave range of notes.
+  public init(notes: [NoteType], arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
+    self.notes = notes
     self.arpeggio = arpeggio
     self.octaves = octaves
   }

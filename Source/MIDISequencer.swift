@@ -53,7 +53,7 @@ public class MIDISequencer {
         for note in step.notes {
           newTrack.add(
             noteNumber: MIDINoteNumber(note.midiNote),
-            velocity: MIDIVelocity(step.velocity.velocity),
+            velocity: step.isEmpty ? 0 : MIDIVelocity(step.velocity.velocity),
             position: lastPosition,
             duration: AKDuration(seconds: tempo.duration(of: step.noteValue)),
             channel: MIDIChannel(track.midiChannel))
