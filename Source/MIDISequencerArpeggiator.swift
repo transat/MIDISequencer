@@ -82,17 +82,21 @@ public struct MIDISequencerArpeggiator {
   /// Generates `MIDISequencerStep`s from notes in arpeggio style order with note values and velocities.
   ///
   /// - Parameters:
-  ///   - noteValue: Values of each note in arpeggiator.
+  ///   - position: Position in track, in form of beats, to start placing steps from.
+  ///   - duration: Duration of each step, in form of beats.
   ///   - velocity: Velocities of each note in arpeggiator.
   /// - Returns: `MIDISequencerStep`s from arpeggiator.
-  public func steps(noteValue: NoteValue, velocity: MIDISequencerStepVelocity) -> [MIDISequencerStep] {
+  public func steps(position: Double, duration: Double, velocity: MIDISequencerStepVelocity) -> [MIDISequencerStep] {
     var stepNotes = [MIDISequencerStep]()
+    var currentPosition = position
     for octave in octaves {
       for type in notes {
         stepNotes.append(MIDISequencerStep(
           note: Note(type: type, octave: octave),
-          noteValue: noteValue,
+          position: currentPosition,
+          duration: duration,
           velocity: velocity))
+        currentPosition += duration
       }
     }
 
@@ -109,7 +113,7 @@ public struct MIDISequencerArpeggiator {
       for i in stepNotes.startIndex ..< stepNotes.endIndex - 1 {
         let j = Int(arc4random_uniform(UInt32(stepNotes.endIndex - i))) + i
         if i != j {
-          swap(&stepNotes[i], &stepNotes[j])
+          stepNotes.swapAt(i, j)
         }
       }
 

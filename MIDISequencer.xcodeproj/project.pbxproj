@@ -353,12 +353,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Example Mac/Pods-Example Mac-frameworks.sh",
 				"${PODS_ROOT}/AudioKit/macOS/AudioKit.framework",
+				"${PODS_ROOT}/AudioKit/macOS/AudioKitUI.framework",
 				"${BUILT_PRODUCTS_DIR}/MusicTheorySwift-macOS10.12/MusicTheorySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MIDISequencer/MIDISequencer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MusicTheorySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MIDISequencer.framework",
 			);

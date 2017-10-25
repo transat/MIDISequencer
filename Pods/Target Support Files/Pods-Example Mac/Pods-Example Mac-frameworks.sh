@@ -103,11 +103,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/AudioKit/macOS/AudioKit.framework"
+  install_framework "${PODS_ROOT}/AudioKit/macOS/AudioKitUI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MusicTheorySwift-macOS10.12/MusicTheorySwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MIDISequencer/MIDISequencer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/AudioKit/macOS/AudioKit.framework"
+  install_framework "${PODS_ROOT}/AudioKit/macOS/AudioKitUI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MusicTheorySwift-macOS10.12/MusicTheorySwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MIDISequencer/MIDISequencer.framework"
 fi

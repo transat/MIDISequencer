@@ -19,6 +19,11 @@ public class MIDISequencerTrack {
   /// Steps in track.
   public var steps: [MIDISequencerStep]
 
+  /// Duration of the track in form of beats.
+  public var duration: Double {
+    return steps.map({ $0.position + $0.duration }).sorted().last ?? 0
+  }
+
   /// Initilizes the track with name and optional channel and steps properties. You can always change its steps and channel after created it.
   ///
   /// - Parameters:

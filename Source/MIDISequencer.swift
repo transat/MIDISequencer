@@ -43,28 +43,24 @@ public class MIDISequencer {
   private func setupSequencer() {
     sequencer = AKSequencer()
 
-    var trackPositions = [AKDuration]()
     for track in tracks {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
       newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
 
-      var lastPosition = AKDuration(seconds: 0)
       for step in track.steps {
         for note in step.notes {
           newTrack.add(
             noteNumber: MIDINoteNumber(note.midiNote),
-            velocity: step.isEmpty ? 0 : MIDIVelocity(step.velocity.velocity),
-            position: lastPosition,
-            duration: AKDuration(seconds: tempo.duration(of: step.noteValue)),
+            velocity: MIDIVelocity(step.velocity.velocity),
+            position: AKDuration(beats: step.position),
+            duration: AKDuration(beats: step.duration),
             channel: MIDIChannel(track.midiChannel))
         }
-        lastPosition = AKDuration(seconds: lastPosition.seconds + tempo.duration(of: step.noteValue))
       }
-      trackPositions.append(lastPosition)
     }
 
     sequencer?.setTempo(tempo.bpm)
-    sequencer?.enableLooping(trackPositions.sorted(by: { $1.seconds > $0.seconds }).first ?? AKDuration(beats: 0))
+    sequencer?.enableLooping(AKDuration(beats: tracks.map({ $0.duration }).sorted().last ?? 0))
   }
 
   /// Adds a track to its `tracks`.

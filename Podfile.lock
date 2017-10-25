@@ -1,6 +1,8 @@
 PODS:
-  - AudioKit (3.7.1)
-  - MIDISequencer (0.0.1):
+  - AudioKit (4.0.2):
+    - AudioKit/UI (= 4.0.2)
+  - AudioKit/UI (4.0.2)
+  - MIDISequencer (0.0.2):
     - AudioKit
     - MusicTheorySwift
   - MusicTheorySwift (0.0.5)
@@ -15,8 +17,8 @@ EXTERNAL SOURCES:
     :path: .
 
 SPEC CHECKSUMS:
-  AudioKit: e04d3282bf904cdf7121965edb067177c6d1c7d1
-  MIDISequencer: ec40eb6fca93dce95bd80d792c12c898b1fa4eaa
+  AudioKit: 97b73bda168c47191a9ba310eea00f9c7b5662d1
+  MIDISequencer: e3daf17c83776d78e9823659611ef55cb9bbcba6
   MusicTheorySwift: 5545b8765da840892a0ec7392f341a086740d66e
 
 PODFILE CHECKSUM: bc1254d740ffbc38fbdaf81af8760ccba40e9837

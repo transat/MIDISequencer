@@ -46,35 +46,43 @@ class ViewController: NSViewController {
       steps: [
         MIDISequencerStep(
           note: Note(type: .a, octave: 3), 
-          noteValue: NoteValue(type: .half),
+          position: 0.0,
+          duration: 0.5,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .a, octave: 3),
-          noteValue: NoteValue(type: .half),
+          position: 0.5,
+          duration: 0.5,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .d, octave: 3),
-          noteValue: NoteValue(type: .half),
+          position: 1.0,
+          duration: 0.5,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .a, octave: 3),
-          noteValue: NoteValue(type: .half),
+          position: 1.5,
+          duration: 0.5,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .e, octave: 3),
-          noteValue: NoteValue(type: .quarter),
+          position: 2.0,
+          duration: 0.25,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .d, octave: 3),
-          noteValue: NoteValue(type: .quarter),
+          position: 2.25,
+          duration: 0.25,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .a, octave: 3),
-          noteValue: NoteValue(type: .quarter),
+          position: 2.5,
+          duration: 0.25,
           velocity: bassVolume),
         MIDISequencerStep(
           note: Note(type: .e, octave: 3),
-          noteValue: NoteValue(type: .quarter),
+          position: 2.75,
+          duration: 0.25,
           velocity: bassVolume),
       ])
 
@@ -86,45 +94,52 @@ class ViewController: NSViewController {
         MIDISequencerStep(
           chord: Chord(type: .min, key: .a),
           octave: 4,
-          noteValue: NoteValue(type: .half),
+          position: 0.0,
+          duration: 0.5,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .a),
           octave: 4,
-          noteValue: NoteValue(type: .half),
+          position: 0.5,
+          duration: 0.5,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .d),
           octave: 4,
-          noteValue: NoteValue(type: .half),
+          position: 1.0,
+          duration: 0.5,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .a),
           octave: 4,
-          noteValue: NoteValue(type: .half),
+          position: 1.5,
+          duration: 0.5,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .e),
           octave: 4,
-          noteValue: NoteValue(type: .quarter),
+          position: 2.0,
+          duration: 0.25,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .d),
           octave: 4,
-          noteValue: NoteValue(type: .quarter),
+          position: 2.25,
+          duration: 0.25,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .a),
           octave: 4,
-          noteValue: NoteValue(type: .quarter),
+          position: 2.5,
+          duration: 0.25,
           velocity: chordsVolume),
         MIDISequencerStep(
           chord: Chord(type: .min, key: .e),
           octave: 4,
-          noteValue: NoteValue(type: .quarter),
+          position: 2.75,
+          duration: 0.25,
           velocity: chordsVolume),
       ])
-
 
     let arpeggiator = MIDISequencerArpeggiator(
       scale: Scale(type: .blues, key: .a),
@@ -134,7 +149,10 @@ class ViewController: NSViewController {
     let melody = MIDISequencerTrack(
       name: "Melody",
       midiChannel: 3,
-      steps: arpeggiator.steps(noteValue: NoteValue(type: .quarter), velocity: .random(min: 80, max: 120)))
+      steps: arpeggiator.steps(
+        position: 0,
+        duration: 0.25,
+        velocity: .random(min: 80, max: 120)))
 
     sequencer.addTrack(track: bass)
     sequencer.addTrack(track: chords)

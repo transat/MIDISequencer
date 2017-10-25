@@ -14,14 +14,22 @@ import MusicTheorySwift
 public enum MIDISequencerStepVelocity {
   /// Static velocity that not changed.
   case standard(Int)
+  /// Maximum velociy which is 127.
+  case max
+  /// Zero velocity.
+  case muted
   /// Random velocity between min and max values that changed in every loop.
   case random(min: Int, max: Int)
-
+  
   /// Returns the velocity value.
   public var velocity: Int {
     switch self {
     case .standard(let velocity):
       return velocity
+    case .max:
+      return 127
+    case .muted:
+      return 0
     case .random(let min, let max):
       return Int(arc4random_uniform(UInt32(max - min))) + min
     }
@@ -32,32 +40,24 @@ public enum MIDISequencerStepVelocity {
 public struct MIDISequencerStep {
   /// Notes in step.
   public var notes: [Note]
-  /// Note value of each notes in step.
-  public var noteValue: NoteValue
+  /// Position in track, in form of beats.
+  public var position: Double
+  /// Duration of step, in form of beats.
+  public var duration: Double
   /// Velocity if each notes in step.
   public var velocity: MIDISequencerStepVelocity
-  /// Use that proprety to mute/unmute step.
-  public var isMuted = false
-  /// Informs that if step is empty or not.
-  public var isEmpty: Bool {
-    return notes.isEmpty
-  }
-
-  /// Creates muted, empty step.
-  public init() {
-    self.init(notes: [], noteValue: NoteValue(type: .quarter), velocity: .standard(0))
-    isMuted = true
-  }
 
   /// Initilizes the step with multiple notes.
   ///
   /// - Parameters:
   ///   - notes: Notes in step.
-  ///   - noteValue: Note value of each note in step.
+  ///   - position: Position in track, in form of beats.
+  ///   - duration: Duration of step, in form of beats.
   ///   - velocity: Velocity of each note in step.
-  public init(notes: [Note], noteValue: NoteValue, velocity: MIDISequencerStepVelocity) {
+  public init(notes: [Note], position: Double, duration: Double, velocity: MIDISequencerStepVelocity) {
     self.notes = notes
-    self.noteValue = noteValue
+    self.position = position
+    self.duration = duration
     self.velocity = velocity
   }
 
@@ -65,10 +65,11 @@ public struct MIDISequencerStep {
   ///
   /// - Parameters:
   ///   - note: Note in step.
-  ///   - noteValue: Note value of note in step.
+  ///   - position: Position in track, in form of beats.
+  ///   - duration: Duration of step, in form of beats.
   ///   - velocity: Velocity of note in step.
-  public init(note: Note, noteValue: NoteValue, velocity: MIDISequencerStepVelocity) {
-    self.init(notes: [note], noteValue: noteValue, velocity: velocity)
+  public init(note: Note, position: Double, duration: Double, velocity: MIDISequencerStepVelocity) {
+    self.init(notes: [note], position: position, duration: duration, velocity: velocity)
   }
 
   /// Initilizes the step with a chord in desired octave.
@@ -76,28 +77,19 @@ public struct MIDISequencerStep {
   /// - Parameters:
   ///   - chord: Desierd chord in step.
   ///   - octave: Octave of chord in step.
-  ///   - noteValue: Note value of chord in step.
+  ///   - position: Position in track, in form of beats.
+  ///   - duration: Duration of step, in form of beats.
   ///   - velocity: Velocity of chord in step.
-  public init(chord: Chord, octave: Int, noteValue: NoteValue, velocity: MIDISequencerStepVelocity) {
-    self.init(notes: chord.notes(octave: octave), noteValue: noteValue, velocity: velocity)
-  }
-}
-
-extension Collection where Iterator.Element == MIDISequencerStep {
-
-  /// Calculates and returns the minimum beat value from `MIDISequencerStep`'s `NoteValues`.
-  public var minimumBeats: Double? {
-    if isEmpty {
-      return nil
-    }
-    return 1.0 / (map({ $0.noteValue.type.beats }).sorted().first ?? 1)
+  public init(chord: Chord, octave: Int, position: Double, duration: Double, velocity: MIDISequencerStepVelocity) {
+    self.init(notes: chord.notes(octave: octave), position: position, duration: duration, velocity: velocity)
   }
 
-  /// Calculates and returns the maximum beat value from `MIDISequencerStep`'s `NoteValues`.
-  public var maximumBeats: Double? {
-    if isEmpty {
-      return nil
-    }
-    return 1.0 / (map({ $0.noteValue.type.beats }).sorted().last ?? 1)
+  /// Creates an empty, muted step.
+  ///
+  /// - Parameters:
+  ///   - position: Position in track, in form of beats.
+  ///   - duration: Duration of step, in form of beats.
+  public init(position: Double, duration: Double) {
+    self.init(notes: [], position: position, duration: duration, velocity: .muted)
   }
 }
