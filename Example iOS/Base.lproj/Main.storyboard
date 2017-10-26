@@ -44,7 +44,7 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVf-rT-Mux">
                                                 <rect key="frame" x="294" y="0.0" width="51" height="31"/>
                                                 <connections>
-                                                    <action selector="otherAppsSwitchDidChangeWithSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="HQG-gf-XUT"/>
+                                                    <action selector="otherAppsSwitchDidChangeWithControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="Rnq-b7-gdT"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
@@ -62,7 +62,7 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gN7-5e-mJ5">
                                                 <rect key="frame" x="294" y="0.0" width="51" height="31"/>
                                                 <connections>
-                                                    <action selector="networkSessionSwitchDidChangeWithSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="3HQ-dH-cjf"/>
+                                                    <action selector="networkSessionSwitchDidChangeWithControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="rMo-Sx-zRu"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
@@ -84,8 +84,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="networkSessionSwitch" destination="gN7-5e-mJ5" id="DRa-H2-oxV"/>
-                        <outlet property="otherAppsSwitch" destination="VVf-rT-Mux" id="a9x-ZY-QUw"/>
                         <outlet property="playButton" destination="W5j-gg-BDC" id="Bf2-xg-iCY"/>
                     </connections>
                 </viewController>

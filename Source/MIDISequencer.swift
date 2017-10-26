@@ -17,9 +17,9 @@ public class MIDISequencer {
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
   public private(set) var sequencer: AKSequencer?
   /// Global MIDI referance object.
-  private let midi = AKMIDI()
+  public let midi = AKMIDI()
   /// MIDI callback instrument that sends MIDI events to other apps.
-  private var midiCallbackInstrument: MIDISequencerCallbackInstrument
+  public private(set) var midiCallbackInstrument: MIDISequencerCallbackInstrument
 
   /// All tracks in sequencer.
   public var tracks = [MIDISequencerTrack]()

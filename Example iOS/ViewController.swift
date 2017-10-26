@@ -7,20 +7,27 @@
 
 import UIKit
 import MIDISequencer
+import AudioKit
+import CoreMIDI
 import MusicTheorySwift
 
 class ViewController: UIViewController {
   @IBOutlet weak var playButton: UIButton?
-  @IBOutlet weak var networkSessionSwitch: UISwitch?
-  @IBOutlet weak var otherAppsSwitch: UISwitch?
   var isPlaying: Bool = false
-  var isOtherAppsEnabled: Bool = true
-  var isNetworkSessionEnabled: Bool = true
   let sequencer = MIDISequencer(midiOutputName: "Baby Steps")
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    enableBackgroundMIDIPlaying()
     setupSequencer()
+  }
+
+  func enableBackgroundMIDIPlaying() {
+    AudioKit.output = sequencer.midiCallbackInstrument
+    AudioKit.start()
+    try? AKSettings.setSession(
+      category: .playback,
+      with: .mixWithOthers)
   }
 
   func setupSequencer() {
@@ -157,21 +164,22 @@ class ViewController: UIViewController {
       sequencer.play()
     }
     isPlaying = !isPlaying
-    update()
-  }
-
-  @IBAction func otherAppsSwitchDidChange(switch: UISwitch) {
-    isOtherAppsEnabled = `switch`.isOn
-    update()
-  }
-
-  @IBAction func networkSessionSwitchDidChange(switch: UISwitch) {
-    isNetworkSessionEnabled = `switch`.isOn
-    update()
-  }
-  
-  func update() {
     playButton?.setTitle(isPlaying ? "▢" : "▷", for: .normal)
+  }
 
+  @IBAction func otherAppsSwitchDidChange(control: UISwitch) {
+    if control.isOn {
+      sequencer.midi.createVirtualOutputPort(name: sequencer.midiOutputName)
+    } else {
+      sequencer.midi.destroyVirtualPorts()
+    }
+  }
+
+  @IBAction func networkSessionSwitchDidChange(control: UISwitch) {
+    if control.isOn {
+      sequencer.midi.openOutput("Session 1")
+    } else {
+      sequencer.midi.endpoints.removeValue(forKey: "Session 1")
+    }
   }
 }
