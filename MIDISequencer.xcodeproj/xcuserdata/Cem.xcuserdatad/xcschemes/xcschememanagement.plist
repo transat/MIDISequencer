@@ -7,7 +7,12 @@
 		<key>Example Mac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>2</integer>
+		</dict>
+		<key>Example iOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
 		</dict>
 		<key>MIDISequencer Mac.xcscheme</key>
 		<dict>

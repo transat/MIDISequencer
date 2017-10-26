@@ -1,6 +1,0 @@
-framework module Pods_MIDISequencer_Mac {
-  umbrella header "Pods-MIDISequencer Mac-umbrella.h"
-
-  export *
-  module * { export * }
-}

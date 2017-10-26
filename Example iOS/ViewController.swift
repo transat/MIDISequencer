@@ -1,38 +1,36 @@
 //
 //  ViewController.swift
-//  Example Mac
+//  Example iOS
 //
-//  Created by Cem Olcay on 13/09/2017.
-//
+//  Created by Cem Olcay on 26.10.2017.
 //
 
-import Cocoa
+import UIKit
 import MIDISequencer
+import AudioKit
+import CoreMIDI
 import MusicTheorySwift
 
-class ViewController: NSViewController {
-  @IBOutlet weak var toggleButton: NSButton?
+class ViewController: UIViewController {
+  @IBOutlet weak var playButton: UIButton?
+  var isPlaying: Bool = false
   let sequencer = MIDISequencer(midiOutputName: "Baby Steps")
-
-  var isPlaying = false {
-    didSet {
-      if isPlaying {
-        toggleButton?.title = "Stop"
-        sequencer.play()
-      } else {
-        toggleButton?.title = "Play"
-        sequencer.stop()
-      }
-    }
-  }
-
-  @IBAction func buttonDidToggle(sender: NSButton) {
-    isPlaying = !isPlaying
-  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    isPlaying = false
+    enableBackgroundMIDIPlaying()
+    setupSequencer()
+  }
+
+  func enableBackgroundMIDIPlaying() {
+    AudioKit.output = sequencer.midiCallbackInstrument
+    AudioKit.start()
+    try? AKSettings.setSession(
+      category: .playback,
+      with: .mixWithOthers)
+  }
+
+  func setupSequencer() {
     sequencer.tempo = Tempo(
       timeSignature: TimeSignature(
         beats: 4,
@@ -45,7 +43,7 @@ class ViewController: NSViewController {
       midiChannel: 1,
       steps: [
         MIDISequencerStep(
-          note: Note(type: .a, octave: 3), 
+          note: Note(type: .a, octave: 3),
           position: 0.0,
           duration: 0.5,
           velocity: bassVolume),
@@ -84,7 +82,7 @@ class ViewController: NSViewController {
           position: 2.75,
           duration: 0.25,
           velocity: bassVolume),
-      ])
+        ])
 
     let chordsVolume = MIDISequencerStepVelocity.standard(100)
     let chords = MIDISequencerTrack(
@@ -139,7 +137,7 @@ class ViewController: NSViewController {
           position: 2.75,
           duration: 0.25,
           velocity: chordsVolume),
-      ])
+        ])
 
     let arpeggiator = MIDISequencerArpeggiator(
       scale: Scale(type: .blues, key: .a),
@@ -157,5 +155,31 @@ class ViewController: NSViewController {
     sequencer.addTrack(track: bass)
     sequencer.addTrack(track: chords)
     sequencer.addTrack(track: melody)
+  }
+
+  @IBAction func playButtonDidPress(sender: UIButton) {
+    if isPlaying {
+      sequencer.stop()
+    } else {
+      sequencer.play()
+    }
+    isPlaying = !isPlaying
+    playButton?.setTitle(isPlaying ? "▢" : "▷", for: .normal)
+  }
+
+  @IBAction func otherAppsSwitchDidChange(control: UISwitch) {
+    if control.isOn {
+      sequencer.midi.createVirtualOutputPort(name: sequencer.midiOutputName)
+    } else {
+      sequencer.midi.destroyVirtualPorts()
+    }
+  }
+
+  @IBAction func networkSessionSwitchDidChange(control: UISwitch) {
+    if control.isOn {
+      sequencer.midi.openOutput("Session 1")
+    } else {
+      sequencer.midi.endpoints.removeValue(forKey: "Session 1")
+    }
   }
 }

@@ -19,3 +19,8 @@ target 'Example Mac' do
   use_frameworks!
   pod 'MIDISequencer', :path => '.'
 end
+
+target 'Example iOS' do
+  use_frameworks!
+  pod 'MIDISequencer', :path => '.'
+end
