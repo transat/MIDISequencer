@@ -3,7 +3,7 @@
 //  MusicTheory
 //
 //  Created by Cem Olcay on 29/12/2016.
-//  Copyright © 2016 prototapp. All rights reserved.
+//  Copyright © 2016 cemolcay. All rights reserved.
 //
 //  https://github.com/cemolcay/MusicTheory
 //
@@ -25,7 +25,7 @@ public enum NoteValueType {
   /// Eighth note.
   case eighth
   /// Sixteenth note.
-  case sixtenth
+  case sixteenth
   /// Thirtysecond note.
   case thirtysecond
   /// Sixtyfourth note.
@@ -42,7 +42,7 @@ public enum NoteValueType {
     case 2: self = .half
     case 4: self = .quarter
     case 8: self = .eighth
-    case 16: self = .sixtenth
+    case 16: self = .sixteenth
     case 32: self = .thirtysecond
     case 64: self = .sixtyfourth
     default: return nil
@@ -57,7 +57,7 @@ public enum NoteValueType {
     case .half: return 2
     case .quarter: return 4
     case .eighth: return 8
-    case .sixtenth: return 16
+    case .sixteenth: return 16
     case .thirtysecond: return 32
     case .sixtyfourth: return 64
     }
@@ -85,9 +85,16 @@ public enum NoteModifier {
 
 /// Defines the duration of a note beatwise.
 public struct NoteValue {
+  /// Type that represents the duration of note.
   public var type: NoteValueType
+  /// Modifier for `NoteType` that modifies the duration.
   public var modifier: NoteModifier
 
+  /// Initilize the NoteValue with its type and optional modifier.
+  ///
+  /// - Parameters:
+  ///   - type: Type of note value that represents note duration.
+  ///   - modifier: Modifier of note value. Defaults `default`.
   public init(type: NoteValueType, modifier: NoteModifier = .default) {
     self.type = type
     self.modifier = modifier
@@ -207,7 +214,7 @@ public func -(noteType: NoteType, halfstep: Int) -> NoteType {
 /// Defines 12 base notes in music.
 /// C, D, E, F, G, A, B with their flats.
 /// Raw values are included for easier calculation based on midi notes.
-public enum NoteType: Int {
+public enum NoteType: Int, Equatable {
   /// C note.
   case c = 0
   /// D♭ or C♯ note.
@@ -253,6 +260,7 @@ public enum NoteType: Int {
 
 extension NoteType: CustomStringConvertible {
 
+  /// Converts `NoteType` to string with its name.
   public var description: String {
     switch self {
     case .c: return "C"
@@ -313,6 +321,17 @@ public func -(note: Note, halfstep: Int) -> Note {
   return Note(midiNote: note.midiNote - halfstep)
 }
 
+/// Calculates the interval between two notes.
+/// Doesn't matter left hand side and right hand side note places.
+///
+/// - Parameters:
+///   - lhs: Left hand side of the equation.
+///   - rhs: Right hand side of the equation.
+/// - Returns: `Intreval` between two notes. You can get the halfsteps from interval as well.
+public func -(lhs: Note, rhs: Note) -> Interval {
+	return Interval(halfstep: abs(rhs.midiNote - lhs.midiNote))
+}
+
 /// Compares the equality of two notes by their types and octaves.
 ///
 /// - Parameters:
@@ -325,7 +344,7 @@ public func ==(left: Note, right: Note) -> Bool {
 
 /// Note object with `NoteType` and octave.
 /// Could be initilized with midiNote.
-public struct Note {
+public struct Note: Equatable {
 
   /// Type of the note like C, D, A, B.
   public var type: NoteType
@@ -353,12 +372,12 @@ public struct Note {
     self.octave = octave
   }
 
-  /// Returns midi note value.
-  /// In theory, this must be in range [0 - 127].
-  /// But it does not limits the midi note value.
-  public var midiNote: Int {
-    return type.rawValue + (octave * 12)
-  }
+	/// Returns midi note value.
+	/// In theory, this must be in range [0 - 127].
+	/// But it does not limits the midi note value.
+	public var midiNote: Int {
+		return type.rawValue + (octave * 12)
+	}
 }
 
 public extension Note {
@@ -378,6 +397,7 @@ public extension Note {
 
 extension Note: CustomStringConvertible {
 
+  /// Converts `Note` to string with its type and octave.
   public var description: String {
     return "\(type)\(octave)"
   }
@@ -385,8 +405,52 @@ extension Note: CustomStringConvertible {
 
 // MARK: - Interval
 
+/// Adds two intervals and returns combined value of two.
+///
+/// - Parameters:
+///   - lhs: Left hand side of the equation.
+///   - rhs: Right hand side of the equation.
+/// - Returns: Combined interval value of two.
+public func +(lhs: Interval, rhs: Interval) -> Interval {
+  return Interval(halfstep: lhs.halfstep + rhs.halfstep)
+}
+
+/// Subsracts two intervals and returns the interval value between two.
+///
+/// - Parameters:
+///   - lhs: Left hand side of the equation.
+///   - rhs: Right hand side of the equation.
+/// - Returns: Interval between two intervals.
+public func -(lhs: Interval, rhs: Interval) -> Interval {
+  return Interval(halfstep: lhs.halfstep - rhs.halfstep)
+}
+
+/// Compares two `Interval` types.
+///
+/// - Parameters:
+///   - lhs: Left hand side of the equation.
+///   - rhs: Right hand side of the equation.
+/// - Returns: Returns bool value of equeation.
+public func ==(lhs: Interval, rhs: Interval) -> Bool {
+	return lhs.halfstep == rhs.halfstep
+}
+
+/// Extends `Interval` by any given octave.
+/// For example between C1 and D1, there are 2 halfsteps but between C1 and D2 there are 14 halfsteps.
+//// ```.M2 * 2``` will give you D2 from a C1.
+///
+/// - Parameters:
+///   - interval: Interval you want to extend by an octave.
+///   - octave: Octave you want to extend your interval by.
+/// - Returns: Returns new interval by calculating halfsteps between target interval and octave.
+public func *(interval: Interval, octave: Int) -> Interval {
+	return Interval(halfstep: interval.halfstep + (12 * (octave - 1)))
+}
+
 /// Defines the interval between `Note`s in halfstep tones and degrees.
-public enum Interval: ExpressibleByIntegerLiteral {
+public enum Interval: Equatable, ExpressibleByIntegerLiteral {
+  public typealias IntegerLiteralType = Int
+
   /// Zero halfstep and zero degree, the note itself.
   case unison
   /// One halfstep and one degree between notes.
@@ -445,7 +509,7 @@ public enum Interval: ExpressibleByIntegerLiteral {
   ///
   /// -           :
   ///   - value: Halfstep value of Interval.
-  public init(integerLiteral value: Int) {
+  public init(integerLiteral value: IntegerLiteralType) {
     self.init(halfstep: value)
   }
 
@@ -509,667 +573,19 @@ extension Interval: CustomStringConvertible {
   public var roman: String {
     switch self {
     case .unison: return "i"
-    case .m2, .M2: return "ii"
-    case .m3, .M3: return "iii"
-    case .P4: return "iv"
-    case .d5, .P5: return "v"
-    case .m6, .M6: return "vi"
-    case .m7, .M7: return "vii"
-    case .P8: return "viii"
+    case .m2: return "ii"
+    case .M2: return "II"
+    case .m3: return "iii"
+    case .M3: return "III"
+    case .P4: return "IV"
+    case .d5: return "v"
+    case .P5: return "V"
+    case .m6: return "vi"
+    case .M6: return "VI"
+    case .m7: return "vii"
+    case .M7: return "VII"
+    case .P8: return "VII"
     case .custom(let halfstep): return "\(halfstep)"
     }
   }
-}
-
-// MARK: - ScaleType
-
-/// Represents scale by the intervals between note sequences.
-public enum ScaleType {
-  /// Major scale.
-  case major
-  /// Minor scale.
-  case minor
-  /// Harmonic minor scale.
-  case harmonicMinor
-  /// Melodic minor scale.
-  case melodicMinor
-  /// Pentatonic major scale.
-  case pentatonicMajor
-  /// Pentatonic minor scale.
-  case pentatonicMinor
-  /// Pentatonic blues scale.
-  case pentatonicBlues
-  /// Pentatonic neutral scale.
-  case pentatonicNeutral
-  /// Ionian scale.
-  case ionian
-  /// Aeolian scale.
-  case aeolian
-  /// Dorian scale.
-  case dorian
-  /// Mixolydian scale.
-  case mixolydian
-  /// Phrygian scale.
-  case phrygian
-  /// Lydian scale.
-  case lydian
-  /// Locrian scale.
-  case locrian
-  /// Half diminished scale.
-  case dimHalf
-  /// Whole diminished scale.
-  case dimWhole
-  /// Whole scale.
-  case whole
-  /// Augmented scale.
-  case augmented
-  /// Chromatic scale.
-  case chromatic
-  /// Roumanian minor scale.
-  case roumanianMinor
-  /// Spanish gypsy scale.
-  case spanishGypsy
-  /// Blues scale.
-  case blues
-  /// Diatonic scale.
-  case diatonic
-  /// Dobule harmonic scale.
-  case doubleHarmonic
-  /// Eight tone spanish scale.
-  case eightToneSpanish
-  /// Enigmatic scale.
-  case enigmatic
-  /// Leading whole tone scale.
-  case leadingWholeTone
-  /// Lydian augmented scale.
-  case lydianAugmented
-  /// Neopolitan major scale.
-  case neopolitanMajor
-  /// Neopolitan minor scale.
-  case neopolitanMinor
-  /// Pelog scale.
-  case pelog
-  /// Prometheus scale.
-  case prometheus
-  /// Prometheus neopolitan scale.
-  case prometheusNeopolitan
-  /// Six tone symmetrical scale.
-  case sixToneSymmetrical
-  /// Super locrian scale.
-  case superLocrian
-  /// Lydian minor scale.
-  case lydianMinor
-  /// Lydian diminished scale.
-  case lydianDiminished
-  /// Nine tone scale.
-  case nineToneScale
-  /// Auxiliary diminished scale.
-  case auxiliaryDiminished
-  /// Auxiliary augmaneted scale.
-  case auxiliaryAugmented
-  /// Auxiliary diminished blues scale.
-  case auxiliaryDimBlues
-  /// Major locrian scale.
-  case majorLocrian
-  /// Overtone scale.
-  case overtone
-  /// Diminished whole tone scale.
-  case diminishedWholeTone
-  /// Pure minor scale.
-  case pureMinor
-  /// Dominant seventh scale.
-  case dominant7th
-  /// Custom scale with given interval set.
-  case custom(intervals: [Interval])
-
-  /// Intervals of the scale.
-  public var intervals: [Interval] {
-    switch self {
-    case .major: return [.unison, .M2, .M3, .P4, .P5, .M6, .M7]
-    case .minor: return [.unison, .M2, .m3, .P4, .P5, .m6, .m7]
-    case .harmonicMinor: return [.unison, .M2, .m3, .P4, .P5, .m6, .M7]
-    case .dorian: return [.unison, .M2, .m3, .P4, .P5, .M6, .m7]
-    case .phrygian: return [.unison, .m2, .m3, .P4, .P5, .m6, .m7]
-    case .lydian: return [.unison, .M2, .M3, .d5, .P5, .M6, .M7]
-    case .mixolydian: return [.unison, .M2, .M3, .P4, .P5, .M6, .m7]
-    case .locrian: return [.unison, .m2, .m3, .P4, .d5, .m6, .m7]
-    case .melodicMinor: return [.unison, .M2, .m3, .P4, .P5, .M6, .M7]
-    case .pentatonicMajor: return [.unison, .M2, .M3, .P5, .M6]
-    case .pentatonicMinor: return [.unison, .m3, .P4, .P5, .m7]
-    case .pentatonicBlues: return [.unison, .m3, .P4, .d5, .P5, .m7]
-    case .pentatonicNeutral: return [.unison, .M2, .P4, .P5, .m7]
-    case .ionian: return [.unison, .M2, .M3, .P4, .P5, .M6, .M7]
-    case .aeolian: return [.unison, .M2, .m3, .P4, .P5, .m6, .m7]
-    case .dimHalf: return [.unison, .m2, .m3, .M3, .d5, .P5, .M6, .m7]
-    case .dimWhole: return [.unison, .M2, .m3, .P4, .d5, .m6, .M6, .M7]
-    case .whole: return [.unison, .M2, .M3, .d5, .m6, .m7]
-    case .augmented: return [.m3, .M3, .P5, .m6, .M7]
-    case .chromatic: return [.unison, .m2, .M2, .m3, .M3, .P4, .d5, .P5, .m6, .M6, .m7, .M7]
-    case .roumanianMinor: return [.unison, .M2, .m3, .d5, .P5, .M6, .m7]
-    case .spanishGypsy: return [.unison, .m2, .M3, .P4, .P5, .m6, .m7]
-    case .blues: return [.unison, .m3, .P4, .d5, .P5, .m7]
-    case .diatonic: return [.unison, .M2, .M3, .P5, .M6]
-    case .doubleHarmonic: return [.unison, .m2, .M3, .P4, .P5, .m6, .M7]
-    case .eightToneSpanish: return [.unison, .m2, .m3, .M3, .P4, .d5, .m6, .m7]
-    case .enigmatic: return [.unison, .m2, .M3, .d5, .m6, .m7, .M7]
-    case .leadingWholeTone: return [.unison, .M2, .M3, .d5, .m6, .M6, .m7]
-    case .lydianAugmented: return [.unison, .M2, .M3, .d5, .m6, .M6, .M7]
-    case .neopolitanMajor: return [.unison, .m2, .m3, .P4, .P5, .M6, .M7]
-    case .neopolitanMinor: return [.unison, .m2, .m3, .P4, .P5, .m6, .m7]
-    case .pelog: return [.unison, .m2, .m3, .d5, .m7, .M7]
-    case .prometheus: return [.unison, .M2, .M3, .d5, .M6, .m7]
-    case .prometheusNeopolitan: return [.unison, .m2, .M3, .d5, .M6, .m7]
-    case .sixToneSymmetrical: return [.unison, .m2, .M3, .P4, .m6, .M6]
-    case .superLocrian: return [.unison, .m2, .m3, .M3, .d5, .m6, .m7]
-    case .lydianMinor: return [.unison, .M2, .M3, .d5, .P5, .m6, .m7]
-    case .lydianDiminished: return [.unison, .M2, .m3, .d5, .P5, .m6, .m7]
-    case .nineToneScale: return [.unison, .M2, .m3, .M3, .d5, .P5, .m6, .M6, .M7]
-    case .auxiliaryDiminished: return [.unison, .M2, .m3, .P4, .d5, .m6, .M6, .M7]
-    case .auxiliaryAugmented: return [.unison, .M2, .M3, .d5, .m6, .m7]
-    case .auxiliaryDimBlues: return [.unison, .m2, .m3, .M3, .d5, .P5, .M6, .m7]
-    case .majorLocrian: return [.unison, .M2, .M3, .P4, .d5, .m6, .m7]
-    case .overtone: return [.unison, .M2, .M3, .d5, .P5, .M6, .m7]
-    case .diminishedWholeTone: return [.unison, .m2, .m3, .M3, .d5, .m6, .m7]
-    case .pureMinor: return [.unison, .M2, .m3, .P4, .P5, .m6, .m7]
-    case .dominant7th: return [.unison, .M2, .M3, .P4, .P5, .M6, .m7]
-    case .custom(let intervals): return intervals
-    }
-  }
-
-  /// An array of all `ScaleType` values.
-  public static var all: [ScaleType] {
-    return [
-      .major,
-      .minor,
-      .harmonicMinor,
-      .melodicMinor,
-      .pentatonicMajor,
-      .pentatonicMinor,
-      .pentatonicBlues,
-      .pentatonicNeutral,
-      .ionian,
-      .aeolian,
-      .dorian,
-      .mixolydian,
-      .phrygian,
-      .lydian,
-      .locrian,
-      .dimHalf,
-      .dimWhole,
-      .whole,
-      .augmented,
-      .chromatic,
-      .roumanianMinor,
-      .spanishGypsy,
-      .blues,
-      .diatonic,
-      .doubleHarmonic,
-      .eightToneSpanish,
-      .enigmatic,
-      .leadingWholeTone,
-      .lydianAugmented,
-      .neopolitanMajor,
-      .neopolitanMinor,
-      .pelog,
-      .prometheus,
-      .prometheusNeopolitan,
-      .sixToneSymmetrical,
-      .superLocrian,
-      .lydianMinor,
-      .lydianDiminished,
-      .nineToneScale,
-      .auxiliaryDiminished,
-      .auxiliaryAugmented,
-      .auxiliaryDimBlues,
-      .majorLocrian,
-      .overtone,
-      .diminishedWholeTone,
-      .pureMinor,
-      .dominant7th,
-    ]
-  }
-}
-
-extension ScaleType: CustomStringConvertible {
-
-  public var description: String {
-    switch self {
-    case .major: return "Major"
-    case .minor: return "Minor"
-    case .harmonicMinor: return "Harmonic Minor"
-    case .melodicMinor: return "Melodic Minor"
-    case .pentatonicMajor: return "Pentatonic Major"
-    case .pentatonicMinor: return "Pentatonic Minor"
-    case .pentatonicBlues: return "Pentatonic Blues"
-    case .pentatonicNeutral: return "Pentatonic Neutral"
-    case .ionian: return "Ionian"
-    case .aeolian: return "Aeolian"
-    case .dorian: return "Dorian"
-    case .mixolydian: return "Mixolydian"
-    case .phrygian: return "Phrygian"
-    case .lydian: return "Lydian"
-    case .locrian: return "Locrian"
-    case .dimHalf: return "Half Diminished"
-    case .dimWhole: return "Whole Diminished"
-    case .whole: return "Whole"
-    case .augmented: return "Augmented"
-    case .chromatic: return "Chromatic"
-    case .roumanianMinor: return "Roumanian Minor"
-    case .spanishGypsy: return "Spanish Gypsy"
-    case .blues: return "Blues"
-    case .diatonic: return "Diatonic"
-    case .doubleHarmonic: return "Double Harmonic"
-    case .eightToneSpanish: return "Eight Tone Spanish"
-    case .enigmatic: return "Enigmatic"
-    case .leadingWholeTone: return "Leading Whole Tone"
-    case .lydianAugmented: return "Lydian Augmented"
-    case .neopolitanMajor: return "Neopolitan Major"
-    case .neopolitanMinor: return "Neopolitan Minor"
-    case .pelog: return "Pelog"
-    case .prometheus: return "Prometheus"
-    case .prometheusNeopolitan: return "Prometheus Neopolitan"
-    case .sixToneSymmetrical: return "Six Tone Symmetrical"
-    case .superLocrian: return "Super Locrian"
-    case .lydianMinor: return "Lydian Minor"
-    case .lydianDiminished: return "Lydian Diminished"
-    case .nineToneScale: return "Nine Tone Scale"
-    case .auxiliaryDiminished: return "Auxiliary Diminished"
-    case .auxiliaryAugmented: return "Auxiliary Augmented"
-    case .auxiliaryDimBlues: return "Auxiliary Dim Blues"
-    case .majorLocrian: return "Major Locrian"
-    case .overtone: return "Overtone"
-    case .diminishedWholeTone: return "Diminished Whole Tone"
-    case .pureMinor: return "Pure Minor"
-    case .dominant7th: return "Dominant 7th"
-    case .custom: return "Custom scale"
-    }
-  }
-}
-
-// MARK: - Scale
-
-/// Scale object with `ScaleType` and scale's key of `NoteType`.
-/// Could calculate note sequences in [Note] format.
-public struct Scale {
-  public var type: ScaleType
-  public var key: NoteType
-
-  /// Initilizes the scale with its type and key.
-  ///
-  /// - Parameters:
-  ///   - type: Type of scale being initilized.
-  ///   - key: Key of scale being initilized.
-  public init(type: ScaleType, key: NoteType) {
-    self.type = type
-    self.key = key
-  }
-
-  /// Generates `Note` array of scale in given octave.
-  ///
-  /// - Parameter octave: Octave value of notes in scale.
-  /// - Returns: Returns `Note` array of the scale in given octave.
-  public func notes(octave: Int) -> [Note] {
-    return notes(octaves: octave)
-  }
-
-  /// Generates `Note` array of scale in given octaves.
-  ///
-  /// - Parameter octaves: Variadic value of octaves to generate notes in scale.
-  /// - Returns: Returns `Note` array of the scale in given octaves.
-  public func notes(octaves: Int...) -> [Note] {
-    return notes(octaves: octaves)
-  }
-
-  /// Generates `Note` array of scale in given octaves.
-  ///
-  /// - Parameter octaves: Array value of octaves to generate notes in scale.
-  /// - Returns: Returns `Note` array of the scale in given octaves.
-  public func notes(octaves: [Int]) -> [Note] {
-    var notes = [Note]()
-    octaves.forEach({ octave in
-      let note = Note(type: key, octave: octave)
-      notes += type.intervals.map({ note + $0 })
-    })
-    return notes
-  }
-
-  /// Notes generated by the intervals of the scale.
-  public var noteTypes: [NoteType] {
-    return type.intervals.map({ key + $0 })
-  }
-}
-
-extension Scale: CustomStringConvertible {
-
-  public var description: String {
-    return "\(key) \(type): " + noteTypes.map({ "\($0)" }).joined(separator: ", ")
-  }
-}
-
-// MARK: - ChordType
-
-/// Defines chords by note sequences initilized by their intervals.
-public enum ChordType {
-  /// Major chord.
-  case maj
-  /// Minor chord.
-  case min
-  /// Agumented chord.
-  case aug
-  /// Power chord.
-  case b5
-  /// Diminished chord.
-  case dim
-  /// Suspended chord
-  case sus
-  /// Suspended 2 chord.
-  case sus2
-  /// Dominant 6th chord.
-  case dom6
-  /// Minor 6th chord.
-  case m6
-  /// Dominant 7th chord.
-  case dom7
-  /// Major 7th chord.
-  case M7
-  /// Minor 7th chord.
-  case m7
-  /// Agumented 7th chord.
-  case aug7
-  /// Diminished 7th chord.
-  case dim7
-  /// Major 7th power chord.
-  case M7b5
-  /// Minor 7th power chord.
-  case m7b5
-  /// Dominant 9th chord.
-  case dom9
-  /// Major 9th chord.
-  case M9
-  /// Minor 9th chord.
-  case m9
-  /// Dominant 11th chord.
-  case dom11
-  /// Major 11th chord.
-  case M11
-  /// Minor 11th chord.
-  case m11
-  /// Dominant 13th chord.
-  case dom13
-  /// Major 13th chord.
-  case M13
-  /// Minor 13th chord.
-  case m13
-  /// Added 9th chord.
-  case add9
-  /// Minor added 9th chord.
-  case madd9
-  /// Major 7th flat 9th chord.
-  case M7b9
-  /// Minor 7th flat 9th chord.
-  case m7b9
-  /// Major 6th added 9th chord.
-  case M6add9
-  /// Minor 6th added 9th chord.
-  case m6add9
-  /// Dominant 7th added 11th chord.
-  case dom7add11
-  /// Major 7th added 11th chord.
-  case M7add11
-  /// Minor 7th added 11th chord.
-  case m7add11
-  /// Dominant 7th added 13th chord.
-  case dom7add13
-  /// Major 7th added 13th chord.
-  case M7add13
-  /// Minor 7th added 13th chord.
-  case m7add13
-  /// Major 7th half diminished chord.
-  case M7a5
-  /// Minor 7th half diminished chord.
-  case m7a5
-  /// Major 7th shard 9th chord.
-  case M7a9
-  /// Major 7th half diminished flat 9th chord.
-  case M7a5b9
-  /// Major 9th sharp 11th chord.
-  case M9a11
-  /// Major 9th flat 13th chord.
-  case M9b13
-  /// Major 6th suspended 4 chord.
-  case M6sus4
-  /// Major 7th suspended 4 chord.
-  case maj7sus4
-  /// Dominant 7th suspended 4 chord.
-  case M7sus4
-  /// Dominant 9th suspended 4 chord.
-  case M9sus4
-  /// Major 9th suspended 4 chord.
-  case maj9sus4
-  /// Minor major 7th chord.
-  case mM7
-  /// Minor major 9th chord.
-  case mM9
-  /// Minor major 11th chord.
-  case mM11
-  /// Minor major 13th chord.
-  case mM13
-  /// Minor major 7th added 11th chord.
-  case mM7add11
-  /// Minor major added 13th chord.
-  case mM7add13
-  /// 5th chord.
-  case M5
-  /// Custom chord with given interval series and description.
-  case custom(intervals: [Interval], description: String)
-
-  /// Intervals of the chord based on the chord's key.
-  public var intervals: [Interval] {
-    switch self {
-    case .maj: return [.unison, .M3, .P5]
-    case .min: return [.unison, .m3, .P5]
-    case .aug: return [.unison, .M3, .m6]
-    case .b5: return [.unison, .M3, .d5]
-    case .dim: return [.unison, .m3, .d5]
-    case .sus: return [.unison, .P4, .P5]
-    case .sus2: return [.unison, .M2, .P5]
-    case .dom6: return [.unison, .M3, .P5, .M6]
-    case .m6: return [.unison, .m3, .P5, .M6]
-    case .dom7: return [.unison, .M3, .P5, .m7]
-    case .M7: return [.unison, .M3, .P5, .M7]
-    case .m7: return [.unison, .m3, .P5, .m7]
-    case .aug7: return [.unison, .M3, .m6, .m7]
-    case .dim7: return [.unison, .m3, .d5, .M6]
-    case .M7b5: return [.unison, .M3, .m6, .M7]
-    case .m7b5: return [.unison, .M3, .d5, .M7]
-    case .dom9: return [.unison, .M2, .M3, .P5, .m7]
-    case .M9: return [.unison, .M2, .M3, .d5, .P5, .M7]
-    case .m9: return [.unison, .M2, .m3, .P5, .m7]
-    case .dom11: return [.unison, .M2, .M3, .P4, .P5, .m7]
-    case .M11: return [.unison, .M2, .M3, .P4, .P5, .M7]
-    case .m11: return [.unison, .M2, .m3, .P4, .P5, .m7]
-    case .dom13: return [.unison, .M2, .M3, .P5, .M6, .m7]
-    case .M13: return [.unison, .M2, .M3, .P5, .M6, .M7]
-    case .m13: return [.unison, .M2, .m3, .P5, .M6, .m7]
-    case .add9: return [.unison, .M2, .M3, .P5]
-    case .madd9: return [.unison, .M2, .m3, .P5]
-    case .M7b9: return [.unison, .m2, .M3, .P5, .m7]
-    case .m7b9: return [.unison, .m2, .m3, .P5, .m7]
-    case .M6add9: return [.unison, .M2, .M3, .P5, .M6]
-    case .m6add9: return [.unison, .M2, .m3, .P5, .M6]
-    case .dom7add11: return [.unison, .M3, .P4, .P5, .m7]
-    case .M7add11: return [.unison, .M3, .P4, .P5, .M7]
-    case .m7add11: return [.unison, .m3, .P4, .P5, .m7]
-    case .dom7add13: return [.unison, .M3, .P5, .M6, .m7]
-    case .M7add13: return [.unison, .M3, .P5, .M6, .M7]
-    case .m7add13: return [.unison, .m3, .P5, .M6, .m7]
-    case .M7a5: return [.unison, .M3, .m6, .m7]
-    case .m7a5: return [.unison, .m3, .m6, .m7]
-    case .M7a9: return [.unison, .m3, .M3, .P5, .m7]
-    case .M7a5b9: return [.unison, .m2, .M3, .m6, .m7]
-    case .M9a11: return [.unison, .M2, .M3, .d5, .P5, .m7]
-    case .M9b13: return [.unison, .M2, .M3, .P5, .m6, .m7]
-    case .M6sus4: return [.unison, .P4, .P5, .M6]
-    case .maj7sus4: return [.unison, .P4, .P5, .M7]
-    case .M7sus4: return [.unison, .P4, .P5, .m7]
-    case .M9sus4: return [.unison, .M2, .P4, .P5, .m7]
-    case .maj9sus4: return [.unison, .M2, .P4, .P5, .M7]
-    case .mM7: return [.unison, .m3, .P5, .M7]
-    case .mM9: return [.unison, .M2, .m3, .P5, .M7]
-    case .mM11: return [.unison, .M2, .m3, .P4, .P5, .M7]
-    case .mM13: return [.unison, .M2, .m3, .P5, .M6,.M7]
-    case .mM7add11: return [.unison, .m3, .P4, .P5, .M7]
-    case .mM7add13: return [.unison, .m3, .P5, .M6, .M7]
-    case .M5: return [.unison, .P5]
-    case .custom(let intervals, _): return intervals
-    }
-  }
-
-  /// An array of all `ChordType` values.
-  public static var all: [ChordType] {
-    return [
-      .maj, .min, .aug, .b5, .M5, .dim,
-      .dom6, .m6, .M6add9, .m6add9,
-      .dom7, .M7, .m7, .mM7, .aug7, .dim7,
-      .M7b5, .m7b5, .M7a5, .m7a5, .M7b9, .m7b9, .M7a9, .M7a5b9,
-      .sus, .sus2, .M6sus4, .maj7sus4, .M7sus4, .M9sus4, .maj9sus4,
-      .dom9, .M9, .m9, .mM9, .add9, .madd9, .M9a11, .M9b13,
-      .dom11, .M11, .m11, .mM11,
-      .dom7add11, .M7add11, .m7add11, .mM7add11,
-      .dom13, .M13, .m13, .mM13, .mM7add13,
-    ]
-  }
-}
-
-extension ChordType: CustomStringConvertible {
-
-  public var description: String {
-    switch self {
-    case .maj: return "maj"
-    case .min: return "min"
-    case .aug: return "aug"
-    case .b5: return "b5"
-    case .dim: return "dim"
-    case .sus: return "sus4"
-    case .sus2: return "sus2"
-    case .dom6: return "6"
-    case .m6: return "minor 6"
-    case .dom7: return "Dominant 7th"
-    case .M7: return "Major 7th"
-    case .m7: return "minor 7th"
-    case .aug7: return "aug7"
-    case .dim7: return "dim7"
-    case .M7b5: return "7b5"
-    case .m7b5: return "m7b5"
-    case .dom9: return "9"
-    case .M9: return "Major 9"
-    case .m9: return "minor 9"
-    case .dom11: return "11"
-    case .M11: return "Major 11"
-    case .m11: return "minor 11"
-    case .dom13: return "13"
-    case .M13: return "Major 13"
-    case .m13: return "minor 13"
-    case .add9: return "add 9"
-    case .madd9: return "minor add9"
-    case .M7b9: return "7b9"
-    case .m7b9: return "m7b9"
-    case .M6add9: return "6add9"
-    case .m6add9: return "minor 6add9"
-    case .dom7add11: return "7add11"
-    case .M7add11: return "Major 7add11"
-    case .m7add11: return "minor 7add11"
-    case .dom7add13: return "7th add13"
-    case .M7add13: return "Major 7add13"
-    case .m7add13: return "minor 7add13"
-    case .M7a5: return "7#5"
-    case .m7a5: return "m7#5"
-    case .M7a9: return "7#9"
-    case .M7a5b9: return "7#5b9"
-    case .M9a11: return "9#11"
-    case .M9b13: return "9b13"
-    case .M6sus4: return "6sus4"
-    case .maj7sus4: return "Major 7sus4"
-    case .M7sus4: return "7sus4"
-    case .M9sus4: return "9sus4"
-    case .maj9sus4: return "Major 9 sus4"
-    case .mM7: return "minor Major 7"
-    case .mM9: return "minor Major 9"
-    case .mM11: return "minor Major 11"
-    case .mM13: return "minor Major 13"
-    case .mM7add11: return "minor Major 7add11"
-    case .mM7add13: return "minor Major 7add13"
-    case .M5: return "5"
-    case .custom(_, let description): return "\(description)"
-    }
-  }
-}
-
-// MARK: - Chord
-
-/// Chord object with its type and key.
-public struct Chord {
-  public var type: ChordType
-  public var key: NoteType
-
-  /// Initilizes the chord with type and key.
-  ///
-  /// - Parameters:
-  ///   - type: `ChordType` of the chord.
-  ///   - key: Key note of the chord.
-  public init(type: ChordType, key: NoteType) {
-    self.type = type
-    self.key = key
-  }
-
-  /// Generates chord `Note`s for given octave.
-  ///
-  /// - Parameter octave: Octave of the chord.
-  /// - Returns: Returns `Note` array with chord's notes in given octave.
-  public func notes(octave: Int) -> [Note] {
-    return notes(octaves: octave)
-  }
-
-  /// Generates chord `Note`s for given octaves.
-  ///
-  /// - Parameter octaves: Variadic value of octaves.
-  /// - Returns: Returns `Note` array with chord's notes in given octaves.
-  public func notes(octaves: Int...) -> [Note] {
-    return notes(octaves: octaves)
-  }
-
-  /// Generates chord `Note`s for given octaves.
-  ///
-  /// - Parameter octaves: Array value of octaves.
-  /// - Returns: Returns `Note` array with chord's notes in given octaves.
-  public func notes(octaves: [Int]) -> [Note] {
-    var notes = [Note]()
-    octaves.forEach({ octave in
-      let note = Note(type: key, octave: octave)
-      notes += type.intervals.map({ note + $0 })
-    })
-    return notes
-  }
-
-  /// Notes generated by the intervals of the chord.
-  public var noteTypes: [NoteType] {
-    return type.intervals.map({ key + $0 })
-  }
-}
-
-extension Chord: CustomStringConvertible {
-
-  public var description: String {
-    return "\(key)\(type)"
-  }
-}
-
-/// Checks the equability between two chords by their base key and notes.
-///
-/// - Parameters:
-///   - left: Left handside of the equation.
-///   - right: Right handside of the equation.
-/// - Returns: Returns Bool value of equation of two given chords.
-public func ==(left: Chord, right: Chord) -> Bool {
-  return left.key == right.key && left.noteTypes == right.noteTypes
 }
