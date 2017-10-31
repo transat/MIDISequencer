@@ -11,7 +11,7 @@ import AudioKit
 import MusicTheorySwift
 
 /// A track that has `MIDISequencerStep`s in `MIDISequencer`.
-public class MIDISequencerTrack {
+public class MIDISequencerTrack: Codable {
   /// Name of track.
   public var name: String
   /// MIDI Channel of track to send notes to.
