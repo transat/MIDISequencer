@@ -49,12 +49,14 @@ public class MIDISequencer {
 
       for step in track.steps {
         for note in step.notes {
-          newTrack.add(
-            noteNumber: MIDINoteNumber(note.midiNote),
-            velocity: MIDIVelocity(step.velocity.velocity),
-            position: AKDuration(beats: step.position),
-            duration: AKDuration(beats: step.duration),
-            channel: MIDIChannel(track.midiChannel))
+          for channel in track.midiChannels {
+            newTrack.add(
+              noteNumber: MIDINoteNumber(note.midiNote),
+              velocity: MIDIVelocity(step.velocity.velocity),
+              position: AKDuration(beats: step.position),
+              duration: AKDuration(beats: step.duration),
+              channel: MIDIChannel(channel))
+          }
         }
       }
     }
@@ -75,6 +77,55 @@ public class MIDISequencer {
   /// - Parameter index: Index of track that will be removed.
   public func removeTrack(at index: Int) {
     tracks.remove(at: index)
+  }
+
+  /// Mutes track.
+  ///
+  /// - Parameter track: Track going to be muted.
+  func muteTrack(track: MIDISequencerTrack) {
+    guard let index = tracks.index(where: { $0 == track }) else { return }
+    tracks[index].isMute = true
+    tracks[index].isSolo = false
+    setupSequencer()
+  }
+
+  /// Unmutes track.
+  ///
+  /// - Parameter track: Track going to be unmuted.
+  func unmuteTrack(track: MIDISequencerTrack) {
+    guard let index = tracks.index(where: { $0 == track }) else { return }
+    tracks[index].isMute = false
+    setupSequencer()
+  }
+
+  /// Makes track solo.
+  ///
+  /// - Parameter track: Track going to be solo.
+  func soloTrack(track: MIDISequencerTrack) {
+    for t in tracks {
+      if t == track {
+        t.isMute = false
+        t.isSolo = true
+      } else {
+        t.isMute = true
+      }
+    }
+    setupSequencer()
+  }
+
+  /// Disables track solo.
+  ///
+  /// - Parameter track: Track going to be unsolo.
+  func unsoloTrack(track: MIDISequencerTrack) {
+    if tracks.filter({ $0.isSolo }).count > 1 {
+      guard let index = tracks.index(where: { $0 == track }) else { return }
+      tracks[index].isSolo = false
+    } else {
+      for t in tracks {
+        t.isSolo = false
+      }
+    }
+    setupSequencer()
   }
 
   /// Plays the sequence from begining.
