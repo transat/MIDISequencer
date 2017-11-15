@@ -131,3 +131,11 @@ Documentation
 ----
 
 See full [documentation](https://cemolcay.github.io/MIDISequencer)
+
+AppStore
+----
+
+This library used in my app [ChordBud](https://itunes.apple.com/us/app/chordbud-chord-progressions/id1313017378?mt=8), check it out!
+  
+[![alt tag](https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg)](https://itunes.apple.com/us/app/chordbud-chord-progressions/id1313017378?mt=8)
+
