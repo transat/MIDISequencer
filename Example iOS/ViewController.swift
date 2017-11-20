@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         noteValue: .quarter),
       bpm: 80)
 
-    let bassVolume = MIDISequencerStepVelocity.standard(100)
+    let bassVolume = MIDISequencerVelocity.standard(100)
     let bass = MIDISequencerTrack(
       name: "Bass",
       midiChannels: [0],
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
           velocity: bassVolume),
         ])
 
-    let chordsVolume = MIDISequencerStepVelocity.standard(100)
+    let chordsVolume = MIDISequencerVelocity.standard(100)
     let chords = MIDISequencerTrack(
       name: "Chords",
       midiChannels: [1],
@@ -152,9 +152,9 @@ class ViewController: UIViewController {
         duration: 0.25,
         velocity: .random(min: 80, max: 120)))
 
-    sequencer.addTrack(track: bass)
-    sequencer.addTrack(track: chords)
-    sequencer.addTrack(track: melody)
+    sequencer.add(track: bass)
+    sequencer.add(track: chords)
+    sequencer.add(track: melody)
   }
 
   @IBAction func playButtonDidPress(sender: UIButton) {

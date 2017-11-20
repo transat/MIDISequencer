@@ -10,72 +10,6 @@ import Foundation
 import AudioKit
 import MusicTheorySwift
 
-/// Velocity of notes in a step.
-public enum MIDISequencerStepVelocity: Codable {
-  /// Static velocity that not changed.
-  case standard(Int)
-  /// Maximum velociy which is 127.
-  case max
-  /// Zero velocity.
-  case muted
-  /// Random velocity between min and max values that changed in every loop.
-  case random(min: Int, max: Int)
-
-  /// Initilize velocity. No random type possible.
-  ///
-  /// - Parameter velocity: Velocity value.
-  public init(velocity: Int) {
-    if velocity == 0 {
-      self = .muted
-    } else if velocity == 127 {
-      self = .max
-    } else {
-      self = .standard(velocity)
-    }
-  }
-
-  /// Returns the velocity value.
-  public var velocity: Int {
-    switch self {
-    case .standard(let velocity):
-      return velocity
-    case .max:
-      return 127
-    case .muted:
-      return 0
-    case .random(let min, let max):
-      return Int(arc4random_uniform(UInt32(max - min))) + min
-    }
-  }
-
-  // MARK: Codable
-
-  /// Keys that conforms CodingKeys protocol to map properties.
-  private enum CodingKeys: String, CodingKey {
-    /// Velocity value of `MIDISequencerStepVelocity`.
-    case velocity
-  }
-
-  /// Decodes struct with a decoder.
-  ///
-  /// - Parameter decoder: Decodes encoded struct.
-  /// - Throws: Tries to initlize struct with a decoder.
-  public init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
-    let velocity = try values.decode(Int.self, forKey: .velocity)
-    self = MIDISequencerStepVelocity(velocity: velocity)
-  }
-
-  /// Encodes struct with an ecoder.
-  ///
-  /// - Parameter encoder: Encodes struct.
-  /// - Throws: Tries to encode struct.
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(velocity, forKey: .velocity)
-  }
-}
-
 /// A step in a `MIDISequencerTrack` of `MIDISequencer`.
 public struct MIDISequencerStep: Codable {
   /// Notes in step.
@@ -85,7 +19,7 @@ public struct MIDISequencerStep: Codable {
   /// Duration of step, in form of beats.
   public var duration: Double
   /// Velocity if each notes in step.
-  public var velocity: MIDISequencerStepVelocity
+  public var velocity: MIDISequencerVelocity
 
   /// Initilizes the step with multiple notes.
   ///
@@ -94,7 +28,7 @@ public struct MIDISequencerStep: Codable {
   ///   - position: Position in track, in form of beats.
   ///   - duration: Duration of step, in form of beats.
   ///   - velocity: Velocity of each note in step.
-  public init(notes: [Note], position: Double, duration: Double, velocity: MIDISequencerStepVelocity) {
+  public init(notes: [Note], position: Double, duration: Double, velocity: MIDISequencerVelocity) {
     self.notes = notes
     self.position = position
     self.duration = duration
@@ -108,7 +42,7 @@ public struct MIDISequencerStep: Codable {
   ///   - position: Position in track, in form of beats.
   ///   - duration: Duration of step, in form of beats.
   ///   - velocity: Velocity of note in step.
-  public init(note: Note, position: Double, duration: Double, velocity: MIDISequencerStepVelocity) {
+  public init(note: Note, position: Double, duration: Double, velocity: MIDISequencerVelocity) {
     self.init(notes: [note], position: position, duration: duration, velocity: velocity)
   }
 
@@ -120,7 +54,7 @@ public struct MIDISequencerStep: Codable {
   ///   - position: Position in track, in form of beats.
   ///   - duration: Duration of step, in form of beats.
   ///   - velocity: Velocity of chord in step.
-  public init(chord: Chord, octave: Int, position: Double, duration: Double, velocity: MIDISequencerStepVelocity) {
+  public init(chord: Chord, octave: Int, position: Double, duration: Double, velocity: MIDISequencerVelocity) {
     self.init(notes: chord.notes(octave: octave), position: position, duration: duration, velocity: velocity)
   }
 

@@ -15,6 +15,8 @@
 		B22E9A6F1FA281B900763C4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22E9A6D1FA281B900763C4F /* Main.storyboard */; };
 		B22E9A711FA281B900763C4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B22E9A701FA281B900763C4F /* Assets.xcassets */; };
 		B22E9A741FA281B900763C4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22E9A721FA281B900763C4F /* LaunchScreen.storyboard */; };
+		B26B85421FC30230005B9D37 /* MIDISequencerVelocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */; };
+		B26B85431FC3027A005B9D37 /* MIDISequencerVelocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */; };
 		B2A730CF1F6C81C30040F34F /* MIDISequencerStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */; };
 		B2A730D11F6C81CF0040F34F /* MIDISequencerTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */; };
 		B2A730D31F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */; };
@@ -50,6 +52,7 @@
 		B22E9A701FA281B900763C4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B22E9A731FA281B900763C4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B22E9A751FA281B900763C4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISequencerVelocity.swift; sourceTree = "<group>"; };
 		B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerStep.swift; sourceTree = "<group>"; };
 		B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerTrack.swift; sourceTree = "<group>"; };
 		B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerCallbackInstrument.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 				B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */,
 				B2A730D21F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift */,
 				B2A730D71F6C84AB0040F34F /* MIDISequencerArpeggiator.swift */,
+				B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -587,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2A730D31F6C81DC0040F34F /* MIDISequencerCallbackInstrument.swift in Sources */,
+				B26B85421FC30230005B9D37 /* MIDISequencerVelocity.swift in Sources */,
 				B2A730D11F6C81CF0040F34F /* MIDISequencerTrack.swift in Sources */,
 				B2A730CF1F6C81C30040F34F /* MIDISequencerStep.swift in Sources */,
 				B2A730D81F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */,
@@ -599,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2A730D61F6C82630040F34F /* MIDISequencerCallbackInstrument.swift in Sources */,
+				B26B85431FC3027A005B9D37 /* MIDISequencerVelocity.swift in Sources */,
 				B2A730D51F6C82630040F34F /* MIDISequencerTrack.swift in Sources */,
 				B2A730D41F6C82630040F34F /* MIDISequencerStep.swift in Sources */,
 				B2A730D91F6C84AB0040F34F /* MIDISequencerArpeggiator.swift in Sources */,
