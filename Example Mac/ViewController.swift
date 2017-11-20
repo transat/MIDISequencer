@@ -154,8 +154,8 @@ class ViewController: NSViewController {
         duration: 0.25,
         velocity: .random(min: 80, max: 120)))
 
-    sequencer.addTrack(track: bass)
-    sequencer.addTrack(track: chords)
-    sequencer.addTrack(track: melody)
+    sequencer.add(track: bass)
+    sequencer.add(track: chords)
+    sequencer.add(track: melody)
   }
 }

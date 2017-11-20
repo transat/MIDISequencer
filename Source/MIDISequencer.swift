@@ -26,6 +26,8 @@ public class MIDISequencer {
   /// Tempo (BPM) and time signature value of sequencer.
   public var tempo = Tempo() { didSet{ sequencer?.setTempo(tempo.bpm) }}
 
+  // MARK: Init
+
   /// Initilizes the sequencer with its name.
   ///
   /// - Parameter midiOutputName: Name of sequencer that seen by other apps.
@@ -66,6 +68,8 @@ public class MIDISequencer {
     sequencer?.enableLooping(AKDuration(beats: tracks.map({ $0.duration }).sorted().last ?? 0))
   }
 
+  // MARK: Sequencing
+
   /// Plays the sequence from begining.
   public func play() {
     setupSequencer()
@@ -89,5 +93,26 @@ public class MIDISequencer {
   public func stop() {
     sequencer?.stop()
     sequencer = nil
+  }
+
+  // MARK: Track Management
+
+  /// Adds a track to optional index.
+  ///
+  /// - Parameters:
+  ///   - track: Adding track.
+  ///   - index: Optional index of adding track. Appends end of array if not defined. Defaults nil.
+  public func add(track: MIDISequencerTrack, at index: Int? = nil) {
+    tracks.insert(track, at: index ?? tracks.count)
+  }
+
+  /// Removes a track.
+  ///
+  /// - Parameter track: Track going to be removed.
+  /// - Returns: Returns result of removing operation in discardableResult form.
+  @discardableResult public func remove(track: MIDISequencerTrack) -> Bool {
+    guard let index = tracks.index(of: track) else { return false }
+    tracks.remove(at: index)
+    return true
   }
 }
