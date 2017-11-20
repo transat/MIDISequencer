@@ -24,7 +24,7 @@ public class MIDISequencer {
   /// All tracks in sequencer.
   public var tracks = [MIDISequencerTrack]()
   /// Tempo (BPM) and time signature value of sequencer.
-  public var tempo = Tempo(timeSignature: TimeSignature(beats: 4, noteValue: .quarter), bpm: 120) { didSet{ sequencer?.setTempo(tempo.bpm) }}
+  public var tempo = Tempo() { didSet{ sequencer?.setTempo(tempo.bpm) }}
 
   /// Initilizes the sequencer with its name.
   ///
@@ -42,14 +42,15 @@ public class MIDISequencer {
   /// Creates an `AKSequencer` from `tracks`
   private func setupSequencer() {
     sequencer = AKSequencer()
-
+    
     for track in tracks {
-      guard let newTrack = sequencer?.newTrack(track.name) else { continue }
-      newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
 
-      for step in track.steps {
-        for note in step.notes {
-          for channel in track.midiChannels {
+        guard let newTrack = sequencer?.newTrack(track.name) else { continue }
+        newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
+
+        for step in track.steps {
+          for note in step.notes {
+            for channel in track.midiChannels {
             newTrack.add(
               noteNumber: MIDINoteNumber(note.midiNote),
               velocity: MIDIVelocity(step.velocity.velocity),
@@ -60,7 +61,7 @@ public class MIDISequencer {
         }
       }
     }
-
+    
     sequencer?.setTempo(tempo.bpm)
     sequencer?.enableLooping(AKDuration(beats: tracks.map({ $0.duration }).sorted().last ?? 0))
   }
@@ -77,55 +78,6 @@ public class MIDISequencer {
   /// - Parameter index: Index of track that will be removed.
   public func removeTrack(at index: Int) {
     tracks.remove(at: index)
-  }
-
-  /// Mutes track.
-  ///
-  /// - Parameter track: Track going to be muted.
-  func muteTrack(track: MIDISequencerTrack) {
-    guard let index = tracks.index(where: { $0 == track }) else { return }
-    tracks[index].isMute = true
-    tracks[index].isSolo = false
-    setupSequencer()
-  }
-
-  /// Unmutes track.
-  ///
-  /// - Parameter track: Track going to be unmuted.
-  func unmuteTrack(track: MIDISequencerTrack) {
-    guard let index = tracks.index(where: { $0 == track }) else { return }
-    tracks[index].isMute = false
-    setupSequencer()
-  }
-
-  /// Makes track solo.
-  ///
-  /// - Parameter track: Track going to be solo.
-  func soloTrack(track: MIDISequencerTrack) {
-    for t in tracks {
-      if t == track {
-        t.isMute = false
-        t.isSolo = true
-      } else {
-        t.isMute = true
-      }
-    }
-    setupSequencer()
-  }
-
-  /// Disables track solo.
-  ///
-  /// - Parameter track: Track going to be unsolo.
-  func unsoloTrack(track: MIDISequencerTrack) {
-    if tracks.filter({ $0.isSolo }).count > 1 {
-      guard let index = tracks.index(where: { $0 == track }) else { return }
-      tracks[index].isSolo = false
-    } else {
-      for t in tracks {
-        t.isSolo = false
-      }
-    }
-    setupSequencer()
   }
 
   /// Plays the sequence from begining.

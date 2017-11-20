@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     let bassVolume = MIDISequencerStepVelocity.standard(100)
     let bass = MIDISequencerTrack(
       name: "Bass",
-      midiChannel: 1,
+      midiChannels: [0],
       steps: [
         MIDISequencerStep(
           note: Note(type: .a, octave: 3),
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
     let chordsVolume = MIDISequencerStepVelocity.standard(100)
     let chords = MIDISequencerTrack(
       name: "Chords",
-      midiChannel: 2,
+      midiChannels: [1],
       steps: [
         MIDISequencerStep(
           chord: Chord(type: ChordType(third: .minor), key: .a),
@@ -146,7 +146,7 @@ class ViewController: UIViewController {
 
     let melody = MIDISequencerTrack(
       name: "Melody",
-      midiChannel: 3,
+      midiChannels: [2],
       steps: arpeggiator.steps(
         position: 0,
         duration: 0.25,
