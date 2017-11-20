@@ -66,20 +66,6 @@ public class MIDISequencer {
     sequencer?.enableLooping(AKDuration(beats: tracks.map({ $0.duration }).sorted().last ?? 0))
   }
 
-  /// Adds a track to its `tracks`.
-  ///
-  /// - Parameter track: Track will be added.
-  public func addTrack(track: MIDISequencerTrack) {
-    tracks.append(track)
-  }
-
-  /// Removes a track from its `tracks` at index.
-  ///
-  /// - Parameter index: Index of track that will be removed.
-  public func removeTrack(at index: Int) {
-    tracks.remove(at: index)
-  }
-
   /// Plays the sequence from begining.
   public func play() {
     setupSequencer()
@@ -90,9 +76,12 @@ public class MIDISequencer {
   ///
   /// - Parameter completion: Fires when setup complete. Useful to dismiss any loading state.
   public func playAsync(completion: (() -> Void)? = nil) {
-    DispatchQueue.main.async {
-      self.play()
-      completion?()
+    DispatchQueue.global(qos: .background).async {
+      self.setupSequencer()
+      DispatchQueue.main.async {
+        self.sequencer?.play()
+        completion?()
+      }
     }
   }
 
