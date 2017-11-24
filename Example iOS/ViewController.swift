@@ -14,7 +14,7 @@ import MusicTheorySwift
 class ViewController: UIViewController {
   @IBOutlet weak var playButton: UIButton?
   var isPlaying: Bool = false
-  let sequencer = MIDISequencer(midiOutputName: "Baby Steps")
+  let sequencer = MIDISequencer(name: "Baby Steps")
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
   }
 
   func enableBackgroundMIDIPlaying() {
-    AudioKit.output = sequencer.midiCallbackInstrument
+    AudioKit.output = sequencer
     AudioKit.start()
     try? AKSettings.setSession(
       category: .playback,
@@ -169,7 +169,7 @@ class ViewController: UIViewController {
 
   @IBAction func otherAppsSwitchDidChange(control: UISwitch) {
     if control.isOn {
-      sequencer.midi.createVirtualOutputPort(name: sequencer.midiOutputName)
+      sequencer.midi.createVirtualOutputPort(name: sequencer.name)
     } else {
       sequencer.midi.destroyVirtualPorts()
     }
