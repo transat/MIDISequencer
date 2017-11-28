@@ -86,7 +86,7 @@ public struct MIDISequencerArpeggiator {
   ///   - duration: Duration of each step, in form of beats.
   ///   - velocity: Velocities of each note in arpeggiator.
   /// - Returns: `MIDISequencerStep`s from arpeggiator.
-  public func steps(position: Double, duration: Double, velocity: MIDISequencerStepVelocity) -> [MIDISequencerStep] {
+  public func steps(position: Double, duration: Double, velocity: MIDISequencerVelocity) -> [MIDISequencerStep] {
     var stepNotes = [MIDISequencerStep]()
     var currentPosition = position
     for octave in octaves {

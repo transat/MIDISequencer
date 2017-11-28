@@ -10,51 +10,62 @@ import Foundation
 import AudioKit
 import MusicTheorySwift
 
-/// Sequencer with multiple tracks and multiple channels to broadcast MIDI sequences other apps.
-public class MIDISequencer {
+/// Sequencer with up to 16 tracks and multiple channels to broadcast MIDI sequences other apps.
+public class MIDISequencer: AKMIDIListener {
   /// Name of the sequencer.
-  public private(set) var midiOutputName: String
+  public private(set) var name: String
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
   public private(set) var sequencer: AKSequencer?
   /// Global MIDI referance object.
   public let midi = AKMIDI()
-  /// MIDI callback instrument that sends MIDI events to other apps.
-  public private(set) var midiCallbackInstrument: MIDISequencerCallbackInstrument
-
   /// All tracks in sequencer.
   public var tracks = [MIDISequencerTrack]()
   /// Tempo (BPM) and time signature value of sequencer.
-  public var tempo = Tempo(timeSignature: TimeSignature(beats: 4, noteValue: .quarter), bpm: 120) { didSet{ sequencer?.setTempo(tempo.bpm) }}
+  public var tempo = Tempo() { didSet{ sequencer?.setTempo(tempo.bpm) }}
+
+  public var isPlaying: Bool {
+    return sequencer?.isPlaying ?? false
+  }
+
+  // MARK: Init
 
   /// Initilizes the sequencer with its name.
   ///
-  /// - Parameter midiOutputName: Name of sequencer that seen by other apps.
-  public init(midiOutputName: String) {
-    self.midiOutputName = midiOutputName
-    midiCallbackInstrument = MIDISequencerCallbackInstrument(midi: midi)
-    midi.createVirtualOutputPort(name: midiOutputName)
+  /// - Parameter name: Name of sequencer that seen by other apps.
+  public init(name: String) {
+    self.name = name
+    midi.createVirtualInputPort(name: "\(name) In")
+    midi.createVirtualOutputPort(name: "\(name) Out")
+    midi.addListener(self)
   }
 
   deinit {
+    midi.destroyVirtualPorts()
     stop()
   }
 
   /// Creates an `AKSequencer` from `tracks`
   private func setupSequencer() {
     sequencer = AKSequencer()
-
-    for track in tracks {
+    
+    for (index, track) in tracks.enumerated() {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
-      newTrack.setMIDIOutput(midiCallbackInstrument.midiIn)
+      newTrack.setMIDIOutput(midi.virtualInput)
 
-      for step in track.steps {
-        for note in step.notes {
-          newTrack.add(
-            noteNumber: MIDINoteNumber(note.midiNote),
-            velocity: MIDIVelocity(step.velocity.velocity),
-            position: AKDuration(beats: step.position),
-            duration: AKDuration(beats: step.duration),
-            channel: MIDIChannel(track.midiChannel))
+        for step in track.steps {
+          let velocity = MIDIVelocity(step.velocity.velocity)
+          let position = AKDuration(beats: step.position)
+          let duration = AKDuration(beats: step.duration)
+
+          for note in step.notes {
+            let noteNumber = MIDINoteNumber(note.midiNote)
+
+            newTrack.add(
+              noteNumber: noteNumber,
+              velocity: velocity,
+              position: position,
+              duration: duration,
+              channel: MIDIChannel(index))
         }
       }
     }
@@ -63,21 +74,9 @@ public class MIDISequencer {
     sequencer?.enableLooping(AKDuration(beats: tracks.map({ $0.duration }).sorted().last ?? 0))
   }
 
-  /// Adds a track to its `tracks`.
-  ///
-  /// - Parameter track: Track will be added.
-  public func addTrack(track: MIDISequencerTrack) {
-    tracks.append(track)
-  }
+  // MARK: Sequencing
 
-  /// Removes a track from its `tracks` at index.
-  ///
-  /// - Parameter index: Index of track that will be removed.
-  public func removeTrack(at index: Int) {
-    tracks.remove(at: index)
-  }
-
-  /// Plays the sequence from begining.
+  /// Plays the sequence from begining if any MIDI Output including virtual one setted up.
   public func play() {
     setupSequencer()
     sequencer?.play()
@@ -85,11 +84,14 @@ public class MIDISequencer {
 
   /// Setups sequencer on background thread and starts playing it.
   ///
-  /// - Parameter completion: Fires when setup complete. Useful to dismiss any loading state.
+  /// - Parameter completion: Fires when setup complete.
   public func playAsync(completion: (() -> Void)? = nil) {
-    DispatchQueue.main.async {
-      self.play()
-      completion?()
+    DispatchQueue.global(qos: .background).async {
+      self.setupSequencer()
+      DispatchQueue.main.async {
+        self.sequencer?.play()
+        completion?()
+      }
     }
   }
 
@@ -97,5 +99,82 @@ public class MIDISequencer {
   public func stop() {
     sequencer?.stop()
     sequencer = nil
+  }
+
+  // MARK: Track Management
+
+  /// Adds a track to optional index.
+  ///
+  /// - Parameters:
+  ///   - track: Adding track.
+  ///   - index: Optional index of adding track. Appends end of array if not defined. Defaults nil.
+  public func add(track: MIDISequencerTrack, at index: Int? = nil) {
+    let trackIndex = index ?? tracks.count
+    if tracks.count < 16, trackIndex > 0, trackIndex < 16 {
+      tracks.insert(track, at: trackIndex)
+    }
+  }
+
+  /// Removes a track.
+  ///
+  /// - Parameter track: Track going to be removed.
+  /// - Returns: Returns result of removing operation in discardableResult form.
+  @discardableResult public func remove(track: MIDISequencerTrack) -> Bool {
+    guard let index = tracks.index(of: track) else { return false }
+    tracks.remove(at: index)
+    return true
+  }
+
+  /// Sets mute state of track to true.
+  ///
+  /// - Parameter on: Set mute or not.
+  /// - Parameter track: Track going to be mute.
+  /// - Returns: If track is not this sequenecer's, return false, else return true.
+  @discardableResult public func mute(on: Bool, track: MIDISequencerTrack) -> Bool {
+    guard let index = tracks.index(of: track) else { return false }
+    tracks[index].isMute = on
+    return true
+  }
+
+  /// Sets solo state of track to true.
+  ///
+  /// - Parameter on: Set solo or not.
+  /// - Parameter track: Track going to be enable soloing.
+  /// - Returns: If track is not this sequenecer's, return false, else return true.
+  @discardableResult public func solo(on: Bool, track: MIDISequencerTrack) -> Bool {
+    guard let index = tracks.index(of: track) else { return false }
+    tracks[index].isSolo = on
+    return true
+  }
+
+  // MARK: AKMIDIListener
+
+  public func receivedMIDINoteOn(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
+    guard sequencer?.isPlaying == true, tracks.indices.contains(Int(channel)) else {
+      midi.sendNoteOffMessage(noteNumber: noteNumber, velocity: velocity)
+      return
+    }
+
+    let track = tracks[Int(channel)]
+    for trackChannel in track.midiChannels {
+      midi.sendNoteOnMessage(
+        noteNumber: noteNumber,
+        velocity: track.isMute ? 0 : velocity,
+        channel: MIDIChannel(trackChannel))
+    }
+  }
+
+  public func receivedMIDINoteOff(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
+    guard sequencer?.isPlaying == true,
+      tracks.indices.contains(Int(channel))
+      else { return }
+
+    let track = tracks[Int(channel)]
+    for trackChannel in track.midiChannels {
+      midi.sendNoteOffMessage(
+        noteNumber: noteNumber,
+        velocity: velocity,
+        channel: MIDIChannel(trackChannel))
+    }
   }
 }

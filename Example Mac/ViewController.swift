@@ -12,7 +12,7 @@ import MusicTheorySwift
 
 class ViewController: NSViewController {
   @IBOutlet weak var toggleButton: NSButton?
-  let sequencer = MIDISequencer(midiOutputName: "Baby Steps")
+  let sequencer = MIDISequencer(name: "Baby Steps")
 
   var isPlaying = false {
     didSet {
@@ -39,10 +39,10 @@ class ViewController: NSViewController {
         noteValue: .quarter),
       bpm: 80)
 
-    let bassVolume = MIDISequencerStepVelocity.standard(100)
+    let bassVolume = MIDISequencerVelocity.standard(100)
     let bass = MIDISequencerTrack(
       name: "Bass",
-      midiChannel: 1,
+      midiChannels: [0],
       steps: [
         MIDISequencerStep(
           note: Note(type: .a, octave: 3), 
@@ -86,10 +86,10 @@ class ViewController: NSViewController {
           velocity: bassVolume),
       ])
 
-    let chordsVolume = MIDISequencerStepVelocity.standard(100)
+    let chordsVolume = MIDISequencerVelocity.standard(100)
     let chords = MIDISequencerTrack(
       name: "Chords",
-      midiChannel: 2,
+      midiChannels: [1],
       steps: [
         MIDISequencerStep(
           chord: Chord(type: ChordType(third: .minor), key: .a),
@@ -148,14 +148,14 @@ class ViewController: NSViewController {
 
     let melody = MIDISequencerTrack(
       name: "Melody",
-      midiChannel: 3,
+      midiChannels: [2],
       steps: arpeggiator.steps(
         position: 0,
         duration: 0.25,
         velocity: .random(min: 80, max: 120)))
 
-    sequencer.addTrack(track: bass)
-    sequencer.addTrack(track: chords)
-    sequencer.addTrack(track: melody)
+    sequencer.add(track: bass)
+    sequencer.add(track: chords)
+    sequencer.add(track: melody)
   }
 }
