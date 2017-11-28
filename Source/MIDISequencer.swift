@@ -77,29 +77,20 @@ public class MIDISequencer: AKMIDIListener {
   // MARK: Sequencing
 
   /// Plays the sequence from begining if any MIDI Output including virtual one setted up.
-  ///
-  /// - Returns: Return true if any MIDI out set and false if not.
-  @discardableResult public func play() -> Bool {
-    guard midi.endpoints.count > 0 else { return false }
+  public func play() {
     setupSequencer()
     sequencer?.play()
-    return true
   }
 
   /// Setups sequencer on background thread and starts playing it.
   ///
-  /// - Parameter completion: Fires when setup complete. Useful to dismiss any loading state. Callback has a bool flag that informs about if play start. If no MIDI out is set, then it is false.
-  public func playAsync(completion: ((_ didStartPlaying: Bool) -> Void)? = nil) {
-    guard midi.endpoints.count > 0 else {
-      completion?(false)
-      return
-    }
-
+  /// - Parameter completion: Fires when setup complete.
+  public func playAsync(completion: (() -> Void)? = nil) {
     DispatchQueue.global(qos: .background).async {
       self.setupSequencer()
       DispatchQueue.main.async {
         self.sequencer?.play()
-        completion?(true)
+        completion?()
       }
     }
   }
@@ -136,50 +127,33 @@ public class MIDISequencer: AKMIDIListener {
 
   /// Sets mute state of track to true.
   ///
+  /// - Parameter on: Set mute or not.
   /// - Parameter track: Track going to be mute.
   /// - Returns: If track is not this sequenecer's, return false, else return true.
-  @discardableResult public func mute(track: MIDISequencerTrack) -> Bool {
+  @discardableResult public func mute(on: Bool, track: MIDISequencerTrack) -> Bool {
     guard let index = tracks.index(of: track) else { return false }
-    tracks[index].isMute = true
-    return true
-  }
-
-  /// Sets mute state of track to false.
-  ///
-  /// - Parameter track: Track going to be unmute.
-  /// - Returns: If track is not this sequenecer's, return false, else return true.
-  @discardableResult public func ummute(track: MIDISequencerTrack) -> Bool {
-    guard let index = tracks.index(of: track) else { return false }
-    tracks[index].isMute = false
+    tracks[index].isMute = on
     return true
   }
 
   /// Sets solo state of track to true.
   ///
+  /// - Parameter on: Set solo or not.
   /// - Parameter track: Track going to be enable soloing.
   /// - Returns: If track is not this sequenecer's, return false, else return true.
-  @discardableResult public func solo(track: MIDISequencerTrack) -> Bool {
+  @discardableResult public func solo(on: Bool, track: MIDISequencerTrack) -> Bool {
     guard let index = tracks.index(of: track) else { return false }
-    tracks[index].isSolo = true
-    return true
-  }
-
-  /// Sets solo state of track to false.
-  ///
-  /// - Parameter track: Track going to be disable soloing.
-  /// - Returns: If track is not this sequenecer's, return false, else return true.
-  @discardableResult public func unsolo(track: MIDISequencerTrack) -> Bool {
-    guard let index = tracks.index(of: track) else { return false }
-    tracks[index].isSolo = false
+    tracks[index].isSolo = on
     return true
   }
 
   // MARK: AKMIDIListener
 
   public func receivedMIDINoteOn(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
-    guard sequencer?.isPlaying == true,
-      tracks.indices.contains(Int(channel))
-      else { return }
+    guard sequencer?.isPlaying == true, tracks.indices.contains(Int(channel)) else {
+      midi.sendNoteOffMessage(noteNumber: noteNumber, velocity: velocity)
+      return
+    }
 
     let track = tracks[Int(channel)]
     for trackChannel in track.midiChannels {

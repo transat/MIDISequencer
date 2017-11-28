@@ -32,7 +32,7 @@ public func ==(lhs: MIDISequencerTrack?, rhs: MIDISequencerTrack?) -> Bool {
 ///   - rhs: Right hand side of the equation.
 /// - Returns: Bool value of equation.
 public func ==(lhs: MIDISequencerTrack, rhs: MIDISequencerTrack) -> Bool {
-  return lhs == rhs
+  return lhs.id == rhs.id
 }
 
 /// A track that has `MIDISequencerStep`s in `MIDISequencer`.
@@ -61,10 +61,11 @@ public class MIDISequencerTrack: Equatable, Codable {
   ///   - name: Name of track.
   ///   - midiChannel: Channel of track to send notes to. Defaults 0.
   ///   - steps: Steps in track. Defaults empty.
-  public init(name: String, midiChannels: [Int] = [0], steps: [MIDISequencerStep] = []) {
+  public init(name: String, midiChannels: [Int] = [0], steps: [MIDISequencerStep] = [], isMute: Bool = false) {
     self.id = UUID().uuidString
     self.name = name
     self.midiChannels = midiChannels
     self.steps = steps
+    self.isMute = isMute
   }
 }
