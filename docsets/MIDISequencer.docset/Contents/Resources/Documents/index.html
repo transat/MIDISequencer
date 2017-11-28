@@ -13,7 +13,7 @@
     <a title="MIDISequencer  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">MIDISequencer Docs</a> (100% documented)</p>
+        <p><a href="index.html">MIDISequencer Docs</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/cemolcay/MIDISequencer"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -42,26 +42,29 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enums</a>
+            <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/MIDISequencerArpeggio.html">MIDISequencerArpeggio</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/MIDISequencerStepVelocity.html">MIDISequencerStepVelocity</a>
+                <a href="Enums/MIDISequencerVelocity.html">MIDISequencerVelocity</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
+            <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/Collection.html">Collection</a>
+                <a href="Functions.html#/s:13MIDISequencer2eeoiSbAA0A5TrackCSg_AEtF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:13MIDISequencer2eeoiSbAA0A5TrackC_ADtF">==(_:_:)</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structs</a>
+            <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a>
@@ -77,33 +80,33 @@
         <section>
           <section class="section">
             
-            <a href='#midisequencer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='midisequencer'>MIDISequencer</h1>
+            <h1 id='midisequencer' class='heading'>MIDISequencer</h1>
 
 <p>MIDI Sequencer that sends MIDI events to other apps.<br>
 Built top on <a href="https://github.com/AudioKit/AudioKit/blob/master/AudioKit/Common/MIDI/Sequencer/AKSequencer.swift"><code>AKSequencer</code></a> of <a href="https://github.com/AudioKit/AudioKit">AudioKit</a> for iOS and macOS.<br>
 Create smart MIDI sequencer instruments with just focus on notes.</p>
-<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+<h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
 <li>Swift 3.0+</li>
 <li>iOS 9.0+</li>
 <li>macOS 10.11+</li>
 </ul>
-<a href='#install' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='install'>Install</h2>
+<h2 id='install' class='heading'>Install</h2>
 <pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'MIDISequencer'</span>
 </code></pre>
-<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+<h2 id='usage' class='heading'>Usage</h2>
 
 <p>MIDISequencer built top on <code>AudioKit</code>&rsquo;s <code>AKSequencer</code> with <a href="https://github.com/cemolcay/MusicTheory"><code>MusicTheory</code></a> library to create sequences just focusing on notes with multiple track support.</p>
 
 <ul>
-<li>Create a <code>MIDISequencer</code> instance.<br></li>
+<li>Create a <code><a href="Classes/MIDISequencer.html">MIDISequencer</a></code> instance.<br></li>
 </ul>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sequencer</span> <span class="o">=</span> <span class="kt">MIDISequencer</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Awesome Sequencer"</span><span class="p">)</span>
 </code></pre>
 
 <ul>
-<li>Create a <code>MIDISequencerTrack</code> and add it to sequencer&rsquo;s tracks.<br></li>
+<li>Create a <code><a href="Classes/MIDISequencerTrack.html">MIDISequencerTrack</a></code> and add it to sequencer&rsquo;s tracks.<br></li>
 </ul>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">track</span> <span class="o">=</span> <span class="kt">MIDISequencerTrack</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="s">"Track 1"</span><span class="p">,</span> 
@@ -122,7 +125,7 @@ Create smart MIDI sequencer instruments with just focus on notes.</p>
 </code></pre>
 
 <ul>
-<li>Add some <code>MIDISequencerStep</code>s to track&rsquo;s <code>steps</code></li>
+<li>Add some <code><a href="Structs/MIDISequencerStep.html">MIDISequencerStep</a></code>s to track&rsquo;s <code>steps</code></li>
 </ul>
 <pre class="highlight swift"><code><span class="n">track</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="p">[</span>
     <span class="kt">MIDISequencerStep</span><span class="p">(</span>
@@ -167,7 +170,7 @@ Create smart MIDI sequencer instruments with just focus on notes.</p>
 </code></pre>
 
 <ul>
-<li>Create arpeggiated steps with any notes from chords, scales in any octave range with <code>MIDISequencerArpeggiator</code>.</li>
+<li>Create arpeggiated steps with any notes from chords, scales in any octave range with <code><a href="Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a></code>.</li>
 </ul>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">arpeggiator</span> <span class="o">=</span> <span class="kt">MIDISequencerArpeggiator</span><span class="p">(</span>
   <span class="nv">scale</span><span class="p">:</span> <span class="kt">Scale</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">blues</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="o">.</span><span class="n">a</span><span class="p">),</span>
@@ -183,7 +186,7 @@ Create smart MIDI sequencer instruments with just focus on notes.</p>
 </code></pre>
 
 <ul>
-<li><p>Set <code>isMuted</code> property to <code>true</code> to mute any <code>MIDISequencerStep</code>.</p></li>
+<li><p>Set <code>isMuted</code> property to <code>true</code> to mute any <code><a href="Structs/MIDISequencerStep.html">MIDISequencerStep</a></code>.</p></li>
 <li><p>Call one of <code>play()</code> or <code>playAsync()</code> functions to play sequance.</p></li>
 </ul>
 <pre class="highlight swift"><code><span class="n">state</span> <span class="o">=</span> <span class="o">.</span><span class="n">loading</span>
@@ -197,15 +200,15 @@ Create smart MIDI sequencer instruments with just focus on notes.</p>
 </ul>
 <pre class="highlight swift"><code><span class="n">sequencer</span><span class="o">.</span><span class="nf">stop</span><span class="p">()</span>
 </code></pre>
-<a href='#documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='documentation'>Documentation</h2>
+<h2 id='documentation' class='heading'>Documentation</h2>
 
 <p>See full <a href="https://cemolcay.github.io/MIDISequencer">documentation</a></p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-09-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-11-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

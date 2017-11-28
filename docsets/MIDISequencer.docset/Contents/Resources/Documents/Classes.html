@@ -13,7 +13,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">MIDISequencer Docs</a> (100% documented)</p>
+        <p><a href="index.html">MIDISequencer Docs</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/cemolcay/MIDISequencer"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -42,26 +42,29 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enums</a>
+            <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/MIDISequencerArpeggio.html">MIDISequencerArpeggio</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/MIDISequencerStepVelocity.html">MIDISequencerStepVelocity</a>
+                <a href="Enums/MIDISequencerVelocity.html">MIDISequencerVelocity</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
+            <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/Collection.html">Collection</a>
+                <a href="Functions.html#/s:13MIDISequencer2eeoiSbAA0A5TrackCSg_AEtF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:13MIDISequencer2eeoiSbAA0A5TrackC_ADtF">==(_:_:)</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structs</a>
+            <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a>
@@ -86,9 +89,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C13MIDISequencer31MIDISequencerCallbackInstrument"></a>
+                    <a name="/c:@M@MIDISequencer@objc(cs)MIDISequencerCallbackInstrument"></a>
                     <a name="//apple_ref/swift/Class/MIDISequencerCallbackInstrument" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C13MIDISequencer31MIDISequencerCallbackInstrument">MIDISequencerCallbackInstrument</a>
+                    <a class="token" href="#/c:@M@MIDISequencer@objc(cs)MIDISequencerCallbackInstrument">MIDISequencerCallbackInstrument</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,9 +121,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C13MIDISequencer18MIDISequencerTrack"></a>
+                    <a name="/s:13MIDISequencer0A5TrackC"></a>
                     <a name="//apple_ref/swift/Class/MIDISequencerTrack" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C13MIDISequencer18MIDISequencerTrack">MIDISequencerTrack</a>
+                    <a class="token" href="#/s:13MIDISequencer0A5TrackC">MIDISequencerTrack</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -136,7 +139,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencerTrack</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencerTrack</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
 
                         </div>
                       </div>
@@ -150,9 +153,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C13MIDISequencer13MIDISequencer"></a>
+                    <a name="/s:13MIDISequencerAAC"></a>
                     <a name="//apple_ref/swift/Class/MIDISequencer" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C13MIDISequencer13MIDISequencer">MIDISequencer</a>
+                    <a class="token" href="#/s:13MIDISequencerAAC">MIDISequencer</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -160,7 +163,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Sequencer with multiple tracks and multiple channels to broadcast MIDI sequences other apps.</p>
+                        <p>Sequencer with up to 16 tracks and multiple channels to broadcast MIDI sequences other apps.</p>
 
                         <a href="Classes/MIDISequencer.html" class="slightly-smaller">See more</a>
                       </div>
@@ -168,7 +171,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencer</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MIDISequencer</span><span class="p">:</span> <span class="kt">AKMIDIListener</span></code></pre>
 
                         </div>
                       </div>
@@ -180,8 +183,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-09-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/cemolcay/MIDISequencer" target="_blank" rel="external">cemolcay</a>. All rights reserved. (Last updated: 2017-11-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

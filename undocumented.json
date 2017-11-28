@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/Cem/Desktop/MIDISequencer/Source/MIDISequencer.swift",
+      "line": 26,
+      "symbol": "MIDISequencer.isPlaying",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/Cem/Desktop/MIDISequencer"
 }
