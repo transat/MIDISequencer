@@ -10,7 +10,7 @@ import Foundation
 import AudioKit
 import MusicTheorySwift
 
-/// Sequencer with multiple tracks and multiple channels to broadcast MIDI sequences other apps.
+/// Sequencer with up to 16 tracks and multiple channels to broadcast MIDI sequences other apps.
 public class MIDISequencer: AKMIDIListener {
   /// Name of the sequencer.
   public private(set) var name: String
