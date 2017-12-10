@@ -10,14 +10,22 @@ import Foundation
 import AudioKit
 import MusicTheorySwift
 
+public enum MIDISequencerMode {
+  case sendMIDI
+  case readMIDI(fileName: String)
+  case synth(node: (_ track: MIDISequencerTrack, _ index: Int) -> AKMIDINode)
+}
+
 /// Sequencer with up to 16 tracks and multiple channels to broadcast MIDI sequences other apps.
 public class MIDISequencer: AKMIDIListener {
   /// Name of the sequencer.
   public private(set) var name: String
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
   public private(set) var sequencer: AKSequencer?
+  /// Sequencer mode.
+  public var mode: MIDISequencerMode = .sendMIDI
   /// Global MIDI referance object.
-  public let midi = AKMIDI()
+  public let midi = AKMIDI()        
   /// All tracks in sequencer.
   public var tracks = [MIDISequencerTrack]()
   /// Tempo (BPM) and time signature value of sequencer.
@@ -47,26 +55,37 @@ public class MIDISequencer: AKMIDIListener {
   /// Creates an `AKSequencer` from `tracks`
   private func setupSequencer() {
     sequencer = AKSequencer()
-    
+
     for (index, track) in tracks.enumerated() {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
-      newTrack.setMIDIOutput(midi.virtualInput)
 
-        for step in track.steps {
-          let velocity = MIDIVelocity(step.velocity.velocity)
-          let position = AKDuration(beats: step.position)
-          let duration = AKDuration(beats: step.duration)
+      for step in track.steps {
+        let velocity = MIDIVelocity(step.velocity.velocity)
+        let position = AKDuration(beats: step.position)
+        let duration = AKDuration(beats: step.duration)
 
-          for note in step.notes {
-            let noteNumber = MIDINoteNumber(note.midiNote)
+        for note in step.notes {
+          let noteNumber = MIDINoteNumber(note.midiNote)
 
-            newTrack.add(
-              noteNumber: noteNumber,
-              velocity: velocity,
-              position: position,
-              duration: duration,
-              channel: MIDIChannel(index))
+          newTrack.add(
+            noteNumber: noteNumber,
+            velocity: velocity,
+            position: position,
+            duration: duration,
+            channel: MIDIChannel(index))
         }
+      }
+    }
+
+    switch mode {
+    case .sendMIDI:
+      sequencer?.tracks.forEach({ $0.setMIDIOutput(midi.virtualInput) })
+    case .readMIDI(let fileName):
+      sequencer?.loadMIDIFile(fileName)
+    case .synth(let node):
+      for (index, track) in tracks.enumerated() {
+        let output = node(track, index)
+        sequencer?.tracks[index].setMIDIOutput(output.midiIn)
       }
     }
 
@@ -150,7 +169,9 @@ public class MIDISequencer: AKMIDIListener {
   // MARK: AKMIDIListener
 
   public func receivedMIDINoteOn(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
-    guard sequencer?.isPlaying == true, tracks.indices.contains(Int(channel)) else {
+    guard sequencer?.isPlaying == true,
+      tracks.indices.contains(Int(channel)),
+      case .sendMIDI = mode else {
       midi.sendNoteOffMessage(noteNumber: noteNumber, velocity: velocity)
       return
     }
@@ -166,7 +187,8 @@ public class MIDISequencer: AKMIDIListener {
 
   public func receivedMIDINoteOff(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
     guard sequencer?.isPlaying == true,
-      tracks.indices.contains(Int(channel))
+      tracks.indices.contains(Int(channel)),
+      case .sendMIDI = mode
       else { return }
 
     let track = tracks[Int(channel)]
