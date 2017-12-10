@@ -13,8 +13,10 @@ import MusicTheorySwift
 
 class ViewController: UIViewController {
   @IBOutlet weak var playButton: UIButton?
+  @IBOutlet weak var modeSegment: UISegmentedControl?
   var isPlaying: Bool = false
   let sequencer = MIDISequencer(name: "Baby Steps")
+  let mixer = AKMixer()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,8 +24,42 @@ class ViewController: UIViewController {
     setupSequencer()
   }
 
+  @IBAction func modeSegmentedDidChange(segmented: UISegmentedControl) {
+    mixer.disconnectInput()
+    switch segmented.selectedSegmentIndex {
+    case 0:
+      sequencer.mode = .sendMIDI
+    case 1:
+      let node = AKFMOscillatorBank()
+      let midiNode = AKMIDINode(node: node)
+      self.mixer.connect(input: midiNode)
+      sequencer.mode = .readMIDI(fileName: "seqDemo.mid", node: midiNode)
+    case 2:
+      sequencer.mode = .synth(node: { track, index in
+        if index == 0 { // bass
+          let node = AKFMOscillatorBank()
+          let midiNode = AKMIDINode(node: node)
+          self.mixer.connect(input: midiNode)
+          return midiNode
+        } else if index == 1 { // chords
+          let node = AKFMOscillatorBank()
+          let midiNode = AKMIDINode(node: node)
+          self.mixer.connect(input: midiNode)
+          return midiNode
+        } else { // melody
+          let node = AKFMOscillatorBank()
+          let midiNode = AKMIDINode(node: node)
+          self.mixer.connect(input: node)
+          return midiNode
+        }
+      })
+    default:
+      return
+    }
+  }
+
   func enableBackgroundMIDIPlaying() {
-    AudioKit.output = sequencer
+    AudioKit.output = mixer
     AudioKit.start()
     try? AKSettings.setSession(
       category: .playback,
@@ -158,12 +194,12 @@ class ViewController: UIViewController {
   }
 
   @IBAction func playButtonDidPress(sender: UIButton) {
-    if isPlaying {
-      sequencer.stop()
-    } else {
-      sequencer.play()
-    }
     isPlaying = !isPlaying
+    if isPlaying {
+      sequencer.play()
+    } else {
+      sequencer.stop()
+    }
     playButton?.setTitle(isPlaying ? "▢" : "▷", for: .normal)
   }
 

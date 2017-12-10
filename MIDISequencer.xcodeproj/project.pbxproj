@@ -15,6 +15,7 @@
 		B22E9A6F1FA281B900763C4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22E9A6D1FA281B900763C4F /* Main.storyboard */; };
 		B22E9A711FA281B900763C4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B22E9A701FA281B900763C4F /* Assets.xcassets */; };
 		B22E9A741FA281B900763C4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22E9A721FA281B900763C4F /* LaunchScreen.storyboard */; };
+		B246FD3D1FDD440A00A58F76 /* seqDemo.mid in Resources */ = {isa = PBXBuildFile; fileRef = B246FD3C1FDD440A00A58F76 /* seqDemo.mid */; };
 		B26B85421FC30230005B9D37 /* MIDISequencerVelocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */; };
 		B26B85431FC3027A005B9D37 /* MIDISequencerVelocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */; };
 		B2A730CF1F6C81C30040F34F /* MIDISequencerStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */; };
@@ -52,6 +53,7 @@
 		B22E9A701FA281B900763C4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B22E9A731FA281B900763C4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B22E9A751FA281B900763C4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B246FD3C1FDD440A00A58F76 /* seqDemo.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = seqDemo.mid; sourceTree = "<group>"; };
 		B26B85411FC30230005B9D37 /* MIDISequencerVelocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISequencerVelocity.swift; sourceTree = "<group>"; };
 		B2A730CE1F6C81C30040F34F /* MIDISequencerStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerStep.swift; sourceTree = "<group>"; };
 		B2A730D01F6C81CF0040F34F /* MIDISequencerTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDISequencerTrack.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				B22E9A701FA281B900763C4F /* Assets.xcassets */,
 				B22E9A721FA281B900763C4F /* LaunchScreen.storyboard */,
 				B22E9A751FA281B900763C4F /* Info.plist */,
+				B246FD3C1FDD440A00A58F76 /* seqDemo.mid */,
 			);
 			path = "Example iOS";
 			sourceTree = "<group>";
@@ -310,7 +313,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0910;
 				TargetAttributes = {
 					B22E9A661FA281B900763C4F = {
 						CreatedOnToolsVersion = 9.0.1;
@@ -363,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B22E9A741FA281B900763C4F /* LaunchScreen.storyboard in Resources */,
+				B246FD3D1FDD440A00A58F76 /* seqDemo.mid in Resources */,
 				B22E9A711FA281B900763C4F /* Assets.xcassets in Resources */,
 				B22E9A6F1FA281B900763C4F /* Main.storyboard in Resources */,
 			);
@@ -781,6 +785,31 @@
 		B2EAA1911F67DC5C00B80D57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -788,6 +817,29 @@
 		B2EAA1921F67DC5C00B80D57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -816,7 +868,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -884,7 +936,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

@@ -12,7 +12,7 @@ import MusicTheorySwift
 
 public enum MIDISequencerMode {
   case sendMIDI
-  case readMIDI(fileName: String)
+  case readMIDI(fileName: String, node: AKMIDINode)
   case synth(node: (_ track: MIDISequencerTrack, _ index: Int) -> AKMIDINode)
 }
 
@@ -44,7 +44,7 @@ public class MIDISequencer: AKMIDIListener {
     self.name = name
     midi.createVirtualInputPort(name: "\(name) In")
     midi.createVirtualOutputPort(name: "\(name) Out")
-    midi.addListener(self)
+
   }
 
   deinit {
@@ -55,6 +55,7 @@ public class MIDISequencer: AKMIDIListener {
   /// Creates an `AKSequencer` from `tracks`
   private func setupSequencer() {
     sequencer = AKSequencer()
+    midi.clearListeners()
 
     for (index, track) in tracks.enumerated() {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
@@ -79,9 +80,11 @@ public class MIDISequencer: AKMIDIListener {
 
     switch mode {
     case .sendMIDI:
+      midi.addListener(self)
       sequencer?.tracks.forEach({ $0.setMIDIOutput(midi.virtualInput) })
-    case .readMIDI(let fileName):
+    case .readMIDI(let fileName, let node):
       sequencer?.loadMIDIFile(fileName)
+      sequencer?.tracks.forEach({ $0.setMIDIOutput(node.midiIn) })
     case .synth(let node):
       for (index, track) in tracks.enumerated() {
         let output = node(track, index)
