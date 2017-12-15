@@ -23,7 +23,7 @@ class ViewController: UIViewController {
   }
 
   func enableBackgroundMIDIPlaying() {
-    AudioKit.output = sequencer
+    AudioKit.output = AKWhiteNoise()
     AudioKit.start()
     try? AKSettings.setSession(
       category: .playback,
