@@ -130,10 +130,9 @@ public class MIDISequencer: AKMIDIListener {
   /// - Parameters:
   ///   - track: Adding track.
   ///   - index: Optional index of adding track. Appends end of array if not defined. Defaults nil.
-  public func add(track: MIDISequencerTrack, at index: Int? = nil) {
-    let trackIndex = index ?? tracks.count
-    if tracks.count < 16, trackIndex > 0, trackIndex < 16 {
-      tracks.insert(track, at: trackIndex)
+  public func add(track: MIDISequencerTrack) {
+    if tracks.count < 16 {
+      tracks.append(track)
     }
   }
 
