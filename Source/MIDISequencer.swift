@@ -10,6 +10,28 @@ import Foundation
 import AudioKit
 import MusicTheorySwift
 
+/// Sequencer's duration type.
+public enum MIDISequencerDuration {
+  /// Longest track's duration is the duration.
+  case auto
+  /// Number of bars. A bar's duration is 1.0.
+  case bars(Int)
+  /// Number if steps. A step's duration is 0.25.
+  case steps(Int)
+
+  /// Calulates the duration of the sequencer.
+  public func duration(of sequencer: MIDISequencer) -> Double {
+    switch self {
+    case .auto:
+      return sequencer.tracks.map({ $0.duration }).sorted().last ?? 0
+    case .bars(let barCount):
+      return barCount * 1.0
+    case .steps(let stepCount):
+      return stepCount * 0.25
+    }
+  }
+}
+
 /// Sequencer with up to 16 tracks and multiple channels to broadcast MIDI sequences other apps.
 public class MIDISequencer: AKMIDIListener {
   /// Name of the sequencer.
@@ -22,7 +44,10 @@ public class MIDISequencer: AKMIDIListener {
   public var tracks = [MIDISequencerTrack]()
   /// Tempo (BPM) and time signature value of sequencer.
   public var tempo = Tempo() { didSet{ sequencer?.setTempo(tempo.bpm) }}
+  /// Duration of the sequencer. Defaults auto.
+  public var duration: MIDISequencerDuration = .auto
 
+  /// Returns true if sequencer is playing.
   public var isPlaying: Bool {
     return sequencer?.isPlaying ?? false
   }
@@ -71,7 +96,7 @@ public class MIDISequencer: AKMIDIListener {
     }
 
     sequencer?.setTempo(tempo.bpm)
-    sequencer?.enableLooping(AKDuration(beats: tracks.map({ $0.duration }).sorted().last ?? 0))
+    sequencer?.enableLooping(AKDuration(beats: duration.duration(of: self)))
   }
 
   // MARK: Sequencing
