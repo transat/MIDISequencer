@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>MIDISequencerArpeggio Enumeration Reference</title>
+    <title>MIDISequencerDuration Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/MIDISequencerArpeggio" class="dashAnchor"></a>
-    <a title="MIDISequencerArpeggio Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Enum/MIDISequencerDuration" class="dashAnchor"></a>
+    <a title="MIDISequencerDuration Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">MIDISequencer Docs</a> (100% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">MIDISequencer Reference</a>
         <img id="carat" src="../img/carat.png" />
-        MIDISequencerArpeggio Enumeration Reference
+        MIDISequencerDuration Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -83,14 +83,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>MIDISequencerArpeggio</h1>
+            <h1>MIDISequencerDuration</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">MIDISequencerArpeggio</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">MIDISequencerDuration</span></code></pre>
 
                 </div>
               </div>
-            <p><code><a href="../Structs/MIDISequencerArpeggiator.html">MIDISequencerArpeggiator</a></code>&rsquo;s arpeggio style.</p>
+            <p>Sequencer&rsquo;s duration type.</p>
 
           </section>
           <section class="section task-group-section">
@@ -99,9 +99,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13MIDISequencer0A8ArpeggioO2upA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/up" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13MIDISequencer0A8ArpeggioO2upA2CmF">up</a>
+                    <a name="/s:13MIDISequencer0A8DurationO4autoA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/auto" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MIDISequencer0A8DurationO4autoA2CmF">auto</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -109,14 +109,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Arpeggiates notes from start to end.</p>
+                        <p>Longest track&rsquo;s duration is the duration.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">up</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">auto</span></code></pre>
 
                         </div>
                       </div>
@@ -130,9 +130,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13MIDISequencer0A8ArpeggioO4downA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/down" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13MIDISequencer0A8ArpeggioO4downA2CmF">down</a>
+                    <a name="/s:13MIDISequencer0A8DurationO4barsACSicACmF"></a>
+                    <a name="//apple_ref/swift/Element/bars" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MIDISequencer0A8DurationO4barsACSicACmF">bars</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -140,14 +140,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Arpeggiates notes from end to start.</p>
+                        <p>Number of bars. A bar&rsquo;s duration is 1.0.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">down</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">bars</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -161,9 +161,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13MIDISequencer0A8ArpeggioO6updownA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/updown" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13MIDISequencer0A8ArpeggioO6updownA2CmF">updown</a>
+                    <a name="/s:13MIDISequencer0A8DurationO5stepsACSicACmF"></a>
+                    <a name="//apple_ref/swift/Element/steps" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MIDISequencer0A8DurationO5stepsACSicACmF">steps</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -171,14 +171,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Arpeggiates note from start to end and arpeggiates again from end to start.</p>
+                        <p>Number if steps. A step&rsquo;s duration is 0.25.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">updown</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">steps</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -192,9 +192,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13MIDISequencer0A8ArpeggioO6randomA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/random" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13MIDISequencer0A8ArpeggioO6randomA2CmF">random</a>
+                    <a name="/s:13MIDISequencer0A8DurationO8durationSdA2AC2of_tF"></a>
+                    <a name="//apple_ref/swift/Method/duration(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MIDISequencer0A8DurationO8durationSdA2AC2of_tF">duration(of:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -202,14 +202,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Arpeggiates notes in random order.</p>
+                        <p>Calulates the duration of the sequencer.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">random</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">duration</span><span class="p">(</span><span class="n">of</span> <span class="nv">sequencer</span><span class="p">:</span> <span class="kt"><a href="../Classes/MIDISequencer.html">MIDISequencer</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Double</span></code></pre>
 
                         </div>
                       </div>
