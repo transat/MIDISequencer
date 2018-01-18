@@ -14,9 +14,9 @@ import MusicTheorySwift
 public struct MIDISequencerStep: Codable {
   /// Notes in step.
   public var notes: [Note]
-  /// Position in track, in form of beats.
+  /// Position in track, in form of beats. 0.25 is first bar's second beat, 1.50 is second bar's third beat.
   public var position: Double
-  /// Duration of step, in form of beats.
+  /// Duration of step, in form of beats. 1.0 is a whole beat, 0.25 is a quarter beat.
   public var duration: Double
   /// Velocity if each notes in step.
   public var velocity: MIDISequencerVelocity

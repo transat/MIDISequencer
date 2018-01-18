@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MIDISequencer"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "MIDI Sequencer that sends MIDI events to other apps."
 
   # This description is used to generate tags and improve search results.
