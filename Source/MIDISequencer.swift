@@ -14,9 +14,9 @@ import MusicTheorySwift
 public enum MIDISequencerDuration {
   /// Longest track's duration is the duration.
   case auto
-  /// Number of bars. A bar's duration is 1.0.
+  /// Number of bars in beat form.
   case bars(Double)
-  /// Number if steps. A step's duration is 0.25.
+  /// Number of steps in beat form.
   case steps(Double)
 
   /// Calulates the duration of the sequencer.
@@ -25,9 +25,9 @@ public enum MIDISequencerDuration {
     case .auto:
       return sequencer.tracks.map({ $0.duration }).sorted().last ?? 0
     case .bars(let barCount):
-      return barCount * 1.0
+      return barCount * 4.0 // A bar has 4 steps.
     case .steps(let stepCount):
-      return stepCount * 0.25
+      return stepCount
     }
   }
 }
@@ -96,7 +96,8 @@ public class MIDISequencer: AKMIDIListener {
     }
 
     sequencer?.setTempo(tempo.bpm)
-    sequencer?.enableLooping(AKDuration(beats: duration.duration(of: self)))
+    sequencer?.setLength(AKDuration(beats: duration.duration(of: self)))
+    sequencer?.enableLooping()
   }
 
   // MARK: Sequencing
