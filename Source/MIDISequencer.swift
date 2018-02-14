@@ -70,7 +70,7 @@ public class MIDISequencer: AKMIDIListener {
   }
 
   /// Creates an `AKSequencer` from `tracks`
-  private func setupSequencer() {
+  public func setupSequencer() {
     sequencer = AKSequencer()
     
     for (index, track) in tracks.enumerated() {
