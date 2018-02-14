@@ -15,9 +15,9 @@ public enum MIDISequencerDuration {
   /// Longest track's duration is the duration.
   case auto
   /// Number of bars. A bar's duration is 1.0.
-  case bars(Int)
+  case bars(Double)
   /// Number if steps. A step's duration is 0.25.
-  case steps(Int)
+  case steps(Double)
 
   /// Calulates the duration of the sequencer.
   public func duration(of sequencer: MIDISequencer) -> Double {
