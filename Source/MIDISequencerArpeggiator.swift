@@ -11,7 +11,7 @@ import AudioKit
 import MusicTheorySwift
 
 /// `MIDISequencerArpeggiator`'s arpeggio style.
-public enum MIDISequencerArpeggio {
+public enum MIDISequencerArpeggio: Int, Codable {
   /// Arpeggiates notes from start to end.
   case up
   /// Arpeggiates notes from end to start.
@@ -23,7 +23,7 @@ public enum MIDISequencerArpeggio {
 }
 
 /// Arpeggiator with arpeggio style and notes that will be arpeggiated.
-public struct MIDISequencerArpeggiator {
+public struct MIDISequencerArpeggiator: Codable {
   /// Notes will be arpeggiated.
   public var notes: [NoteType]
   /// Arpeggio style.
