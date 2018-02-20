@@ -8,7 +8,7 @@
 import Foundation
 
 /// Velocity of notes in a step.
-public enum MIDISequencerVelocity: Codable {
+public enum MIDISequencerVelocity: Codable, ExpressibleByIntegerLiteral {
   /// Static velocity that not changed.
   case standard(Int)
   /// Maximum velociy which is 127.
@@ -22,9 +22,9 @@ public enum MIDISequencerVelocity: Codable {
   ///
   /// - Parameter velocity: Velocity value.
   public init(velocity: Int) {
-    if velocity == 0 {
+    if velocity <= 0 {
       self = .muted
-    } else if velocity == 127 {
+    } else if velocity >= 127 {
       self = .max
     } else {
       self = .standard(velocity)
@@ -43,6 +43,18 @@ public enum MIDISequencerVelocity: Codable {
     case .random(let min, let max):
       return Int(arc4random_uniform(UInt32(max - min))) + min
     }
+  }
+
+  // MARK: ExpressibleByIntegerLiteral
+
+  /// Integer literal type is `Int`.
+  public typealias IntegerLiteralType = Int
+
+  /// Initilizes with a direct integer value.
+  ///
+  /// - Parameter value: Integer value for the velocity.
+  public init(integerLiteral value: MIDISequencerVelocity.IntegerLiteralType) {
+    self = MIDISequencerVelocity(velocity: value)
   }
 
   // MARK: Codable
