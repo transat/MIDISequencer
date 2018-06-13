@@ -112,7 +112,7 @@ velocity: .standard(60))
 - Set `isMuted` property to `true` to mute any `MIDISequencerStep`.
                    DESC
 
-  s.homepage     = "https://github.com/cemolcay/MIDISequencer"
+  s.homepage     = "https://github.com/AudioKit/MIDISequencer"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
