@@ -1,5 +1,5 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+source 'https://github.com/AudioKit/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 def shared_pods
   use_frameworks!
@@ -26,6 +26,6 @@ target 'Example iOS' do
 end
 
 pre_install do |installer|
-  # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
+  # workaround for CocoaPods/CocoaPods#3289
   Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
 end

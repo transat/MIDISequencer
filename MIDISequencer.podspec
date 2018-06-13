@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MIDISequencer"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "MIDI Sequencer that sends MIDI events to other apps."
 
   # This description is used to generate tags and improve search results.
@@ -164,7 +164,7 @@ velocity: .standard(60))
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/cemolcay/MIDISequencer.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/AudioKit/MIDISequencer.git", :tag => "#{s.version}" }
   # { :path => "." }
 
 
