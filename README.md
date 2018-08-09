@@ -19,6 +19,8 @@ Install
 pod 'MIDISequencer'
 ```
 
+This library has an AudioKit dependency but since AudioKit is a static library and cocopods not supporting mixing static libraries with pure Swift libraries, you need to import AudioKit manually in to your project.
+
 Usage
 ----
 

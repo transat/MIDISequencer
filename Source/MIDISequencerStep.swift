@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import AudioKit
 import MusicTheorySwift
 
 /// A step in a `MIDISequencerTrack` of `MIDISequencer`.

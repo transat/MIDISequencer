@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import AudioKit
 import MusicTheorySwift
 
 /// `MIDISequencerArpeggiator`'s arpeggio style.

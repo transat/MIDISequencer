@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import AudioKit
-import MusicTheorySwift
 
 /// Checks equatibility of two optional `MIDISequencerTrack`s.
 ///
