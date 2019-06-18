@@ -1,10 +1,13 @@
 PODS:
-  - AudioKit (4.3.1):
-    - AudioKit/UI (= 4.3.1)
-  - AudioKit/UI (4.3.1)
+  - AudioKit (4.7.2):
+    - AudioKit/Core (= 4.7.2)
+    - AudioKit/UI (= 4.7.2)
+  - AudioKit/Core (4.7.2)
+  - AudioKit/UI (4.7.2):
+    - AudioKit/Core
   - MIDISequencer (0.0.5):
     - MusicTheorySwift
-  - MusicTheorySwift (1.0.0)
+  - MusicTheorySwift (1.2.3)
 
 DEPENDENCIES:
   - AudioKit
@@ -12,9 +15,8 @@ DEPENDENCIES:
   - MusicTheorySwift
 
 SPEC REPOS:
-  https://github.com/AudioKit/Specs.git:
-    - AudioKit
   https://github.com/cocoapods/specs.git:
+    - AudioKit
     - MusicTheorySwift
 
 EXTERNAL SOURCES:
@@ -22,10 +24,10 @@ EXTERNAL SOURCES:
     :path: "."
 
 SPEC CHECKSUMS:
-  AudioKit: cc046831314339331b7dbbebc62a01b5d20eda2b
-  MIDISequencer: 2f9520801112fabf4bfc41f867592207da31762f
-  MusicTheorySwift: 2102218ba959c04204f376d02f7719fe5f4cfb98
+  AudioKit: ee4ab79e2fffe42e52b8fd8d214eaaea968c368e
+  MIDISequencer: 4e5c09b92c09e20aa9cbf346148369cf721f414e
+  MusicTheorySwift: e477673d9e5ef8809939557dd20ac2ce3f2d1f8e
 
-PODFILE CHECKSUM: 51a0e4c5999b74933085011fad38760c8fa05062
+PODFILE CHECKSUM: a9393c33c5692510759f6a90ddb4b6b5c2b7e79a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.2
