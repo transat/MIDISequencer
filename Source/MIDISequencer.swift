@@ -83,7 +83,7 @@ public class MIDISequencer: AKMIDIListener {
           let duration = AKDuration(beats: step.duration)
 
           for note in step.notes {
-            let noteNumber = MIDINoteNumber(note.midiNote)
+            let noteNumber = MIDINoteNumber(note.rawValue)
 
             newTrack.add(
               noteNumber: noteNumber,
@@ -145,7 +145,7 @@ public class MIDISequencer: AKMIDIListener {
   /// - Parameter track: Track going to be removed.
   /// - Returns: Returns result of removing operation in discardableResult form.
   @discardableResult public func remove(track: MIDISequencerTrack) -> Bool {
-    guard let index = tracks.index(of: track) else { return false }
+    guard let index = tracks.firstIndex(of: track) else { return false }
     tracks.remove(at: index)
     return true
   }
@@ -156,7 +156,7 @@ public class MIDISequencer: AKMIDIListener {
   /// - Parameter track: Track going to be mute.
   /// - Returns: If track is not this sequenecer's, return false, else return true.
   @discardableResult public func mute(on: Bool, track: MIDISequencerTrack) -> Bool {
-    guard let index = tracks.index(of: track) else { return false }
+    guard let index = tracks.firstIndex(of: track) else { return false }
     tracks[index].isMute = on
     return true
   }
@@ -167,7 +167,7 @@ public class MIDISequencer: AKMIDIListener {
   /// - Parameter track: Track going to be enable soloing.
   /// - Returns: If track is not this sequenecer's, return false, else return true.
   @discardableResult public func solo(on: Bool, track: MIDISequencerTrack) -> Bool {
-    guard let index = tracks.index(of: track) else { return false }
+    guard let index = tracks.firstIndex(of: track) else { return false }
     tracks[index].isSolo = on
     return true
   }

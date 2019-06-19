@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MIDISequencer"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "MIDI Sequencer that sends MIDI events to other apps."
 
   # This description is used to generate tags and improve search results.
@@ -219,5 +219,6 @@ velocity: .standard(60))
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "MusicTheorySwift"
+  s.dependency "AudioKit"
 
 end

@@ -24,7 +24,7 @@ public enum MIDISequencerArpeggio: Int, Codable {
 /// Arpeggiator with arpeggio style and notes that will be arpeggiated.
 public struct MIDISequencerArpeggiator: Codable {
   /// Notes will be arpeggiated.
-  public var notes: [NoteType]
+  public var notes: [Key]
   /// Arpeggio style.
   public var arpeggio: MIDISequencerArpeggio
   /// Octave range of arpeggiator.
@@ -36,7 +36,7 @@ public struct MIDISequencerArpeggiator: Codable {
   ///   - note: Notes will be arpeggiated.
   ///   - arpeggio: Arpeggio style.
   ///   - octaves: Octave range of notes.
-  public init(note: NoteType, arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
+  public init(note: Key, arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
     self.notes = [note]
     self.arpeggio = arpeggio
     self.octaves = octaves
@@ -48,7 +48,7 @@ public struct MIDISequencerArpeggiator: Codable {
   ///   - note: Notes will be arpeggiated.
   ///   - arpeggio: Arpeggio style.
   ///   - octaves: Octave range of notes.
-  public init(notes: [NoteType], arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
+  public init(notes: [Key], arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
     self.notes = notes
     self.arpeggio = arpeggio
     self.octaves = octaves
@@ -61,7 +61,7 @@ public struct MIDISequencerArpeggiator: Codable {
   ///   - arpeggio: Arpeggio style.
   ///   - octaves: Octave range of notes.
   public init(scale: Scale, arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
-    self.notes = scale.noteTypes
+    self.notes = scale.keys
     self.arpeggio = arpeggio
     self.octaves = octaves
   }
@@ -73,7 +73,7 @@ public struct MIDISequencerArpeggiator: Codable {
   ///   - arpeggio: Arpeggio style.
   ///   - octaves: Octave range of notes.
   public init(chord: Chord, arpeggio: MIDISequencerArpeggio, octaves: [Int]) {
-    self.notes = chord.noteTypes
+    self.notes = chord.keys
     self.arpeggio = arpeggio
     self.octaves = octaves
   }
@@ -91,7 +91,7 @@ public struct MIDISequencerArpeggiator: Codable {
     for octave in octaves {
       for type in notes {
         stepNotes.append(MIDISequencerStep(
-          note: Note(type: type, octave: octave),
+          note: Pitch(key: type, octave: octave),
           position: currentPosition,
           duration: duration,
           velocity: velocity))

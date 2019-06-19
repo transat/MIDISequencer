@@ -8,7 +8,7 @@ Create smart MIDI sequencer instruments with just focus on notes.
 Requirements
 ----
 
-- Swift 3.0+
+- Swift 5.0+
 - iOS 9.0+
 - macOS 10.11+
 
@@ -18,8 +18,6 @@ Install
 ``` ruby
 pod 'MIDISequencer'
 ```
-
-This library has an AudioKit dependency but since AudioKit is a static library and cocopods not supporting mixing static libraries with pure Swift libraries, you need to import AudioKit manually in to your project.
 
 Usage
 ----
