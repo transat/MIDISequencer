@@ -13,13 +13,3 @@ end
 target 'MIDISequencer Mac' do
   shared_pods
 end
-
-target 'Example Mac' do
-  use_frameworks!
-  pod 'MIDISequencer', :path => '.'
-end
-
-target 'Example iOS' do
-  use_frameworks!
-  pod 'MIDISequencer', :path => '.'
-end
