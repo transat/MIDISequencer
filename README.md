@@ -130,7 +130,7 @@ sequencer.stop()
 Documentation
 ----
 
-See full [documentation](https://cemolcay.github.io/MIDISequencer)
+See full [documentation](https://audiokit.io/MIDISequencer)
 
 AppStore
 ----
