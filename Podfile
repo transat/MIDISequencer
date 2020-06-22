@@ -7,11 +7,11 @@ def shared_pods
 end
 
 target 'MIDISequencer iOS' do
-  platform :ios, '9.0'
+  platform :ios, '11.0'
   shared_pods
 end
 
 target 'MIDISequencer Mac' do
-  platform :osx, '10.11'
+  platform :osx, '10.13'
   shared_pods
 end

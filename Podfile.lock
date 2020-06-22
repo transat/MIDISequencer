@@ -1,9 +1,9 @@
 PODS:
-  - AudioKit (4.7.2):
-    - AudioKit/Core (= 4.7.2)
-    - AudioKit/UI (= 4.7.2)
-  - AudioKit/Core (4.7.2)
-  - AudioKit/UI (4.7.2):
+  - AudioKit (4.10.1):
+    - AudioKit/Core (= 4.10.1)
+    - AudioKit/UI (= 4.10.1)
+  - AudioKit/Core (4.10.1)
+  - AudioKit/UI (4.10.1):
     - AudioKit/Core
   - MusicTheorySwift (1.2.3)
 
@@ -12,14 +12,14 @@ DEPENDENCIES:
   - MusicTheorySwift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AudioKit
     - MusicTheorySwift
 
 SPEC CHECKSUMS:
-  AudioKit: ee4ab79e2fffe42e52b8fd8d214eaaea968c368e
+  AudioKit: b8e508a0af3dc7d53caf0ca1002b187a662f949e
   MusicTheorySwift: e477673d9e5ef8809939557dd20ac2ce3f2d1f8e
 
-PODFILE CHECKSUM: 7b2bc70e4cd9c81bc5125a9f799164247aadd795
+PODFILE CHECKSUM: 8322cb369c8463aea264d7a7bf968da36e27eaf8
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.9.1

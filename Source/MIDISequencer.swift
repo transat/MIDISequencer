@@ -37,7 +37,7 @@ public class MIDISequencer: AKMIDIListener {
   /// Name of the sequencer.
   public private(set) var name: String
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
-  public private(set) var sequencer: AKSequencer?
+  public private(set) var sequencer: AKAppleSequencer?
   /// Global MIDI referance object.
   public let midi = AKMIDI()
   /// All tracks in sequencer.
@@ -71,7 +71,7 @@ public class MIDISequencer: AKMIDIListener {
 
   /// Creates an `AKSequencer` from `tracks`
   public func setupSequencer() {
-    sequencer = AKSequencer()
+    sequencer = AKAppleSequencer()
     
     for (index, track) in tracks.enumerated() {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
