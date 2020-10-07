@@ -116,7 +116,7 @@ sequencer.addTrack(track: melody)
 
 ``` swift
 state = .loading
-sequancer.playAsync(completion: {
+sequencer.playAsync(completion: {
 	self.state = .playing
 })
 ```
