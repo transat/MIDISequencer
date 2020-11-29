@@ -8,7 +8,8 @@
 
 import Foundation
 import AudioKit
-import MusicTheorySwift
+import CoreMIDI
+import MusicTheory
 
 /// Sequencer's duration type.
 public enum MIDISequencerDuration {
@@ -32,14 +33,143 @@ public enum MIDISequencerDuration {
   }
 }
 
+// struct represeting last data received of each type
+
+struct MIDIMonitorData {
+    var noteOn = 0
+    var velocity = 0
+    var noteOff = 0
+    var channel = 0
+    var afterTouch = 0
+    var afterTouchNoteNumber = 0
+    var programChange = 0
+    var pitchWheelValue = 0
+    var controllerNumber = 0
+    var controllerValue = 0
+
+}
+
+
+
 /// Sequencer with up to 16 tracks and multiple channels to broadcast MIDI sequences other apps.
-public class MIDISequencer: AKMIDIListener {
+public class MIDISequencer: ObservableObject, MIDIListener {
+  
+    @Published var data = MIDIMonitorData()
+
+//    init() {}
+
+    func start() {
+        midi.openInput(name: "Bluetooth")
+        midi.openInput()
+        midi.addListener(self)
+    }
+
+    /// Stops playing the sequence.
+    func stop() {
+        midi.closeAllInputs()
+//        sequencer?.stop()
+//        sequencer = nil
+    }
+    
+    
+
+    public func receivedMIDINoteOn(noteNumber: MIDINoteNumber,
+                            velocity: MIDIVelocity,
+                            channel: MIDIChannel,
+                            portID: MIDIUniqueID? = nil,
+                            offset: MIDITimeStamp = 0) {
+        DispatchQueue.main.async {
+            self.data.noteOn = Int(noteNumber)
+            self.data.velocity = Int(velocity)
+            self.data.channel = Int(channel)
+        }
+    }
+
+    public func receivedMIDINoteOff(noteNumber: MIDINoteNumber,
+                             velocity: MIDIVelocity,
+                             channel: MIDIChannel,
+                             portID: MIDIUniqueID? = nil,
+                             offset: MIDITimeStamp = 0) {
+        DispatchQueue.main.async {
+            self.data.noteOff = Int(noteNumber)
+            self.data.channel = Int(channel)
+        }
+    }
+
+    public func receivedMIDIController(_ controller: MIDIByte,
+                                value: MIDIByte,
+                                channel: MIDIChannel,
+                                portID: MIDIUniqueID? = nil,
+                                offset: MIDITimeStamp = 0) {
+        print("controller \(controller) \(value)")
+        data.controllerNumber = Int(controller)
+        data.controllerValue = Int(value)
+        data.channel = Int(channel)
+    }
+
+    public func receivedMIDIAftertouch(_ pressure: MIDIByte,
+                                channel: MIDIChannel,
+                                portID: MIDIUniqueID? = nil,
+                                offset: MIDITimeStamp = 0) {
+        print("received after touch")
+        data.afterTouch = Int(pressure)
+        data.channel = Int(channel)
+    }
+
+    public func receivedMIDIAftertouch(noteNumber: MIDINoteNumber,
+                                pressure: MIDIByte,
+                                channel: MIDIChannel,
+                                portID: MIDIUniqueID? = nil,
+                                offset: MIDITimeStamp = 0) {
+        print("recv'd after touch \(noteNumber)")
+        data.afterTouchNoteNumber = Int(noteNumber)
+        data.afterTouch = Int(pressure)
+        data.channel = Int(channel)
+    }
+
+    public func receivedMIDIPitchWheel(_ pitchWheelValue: MIDIWord,
+                                channel: MIDIChannel,
+                                portID: MIDIUniqueID? = nil,
+                                offset: MIDITimeStamp = 0) {
+        print("midi wheel \(pitchWheelValue)")
+        data.pitchWheelValue = Int(pitchWheelValue)
+        data.channel = Int(channel)
+    }
+
+    public func receivedMIDIProgramChange(_ program: MIDIByte,
+                                   channel: MIDIChannel,
+                                   portID: MIDIUniqueID? = nil,
+                                   offset: MIDITimeStamp = 0) {
+        print("PC")
+        data.programChange = Int(program)
+        data.channel = Int(channel)
+    }
+
+    public func receivedMIDISystemCommand(_ data: [MIDIByte],
+                                   portID: MIDIUniqueID? = nil,
+                                   offset: MIDITimeStamp = 0) {
+//        print("sysex")
+    }
+
+    public func receivedMIDISetupChange() {
+        // Do nothing
+    }
+
+    public func receivedMIDIPropertyChange(propertyChangeInfo: MIDIObjectPropertyChangeNotification) {
+        // Do nothing
+    }
+
+    public func receivedMIDINotification(notification: MIDINotification) {
+        // Do nothing
+    }
+
+    
   /// Name of the sequencer.
   public private(set) var name: String
   /// Sequencer that sequences the `MIDISequencerStep`s in each `MIDISequencerTrack`.
-  public private(set) var sequencer: AKAppleSequencer?
+  public private(set) var sequencer: AppleSequencer?
   /// Global MIDI referance object.
-  public let midi = AKMIDI()
+  public let midi = MIDI()
   /// All tracks in sequencer.
   public var tracks = [MIDISequencerTrack]()
   /// Tempo (BPM) and time signature value of sequencer.
@@ -71,7 +201,7 @@ public class MIDISequencer: AKMIDIListener {
 
   /// Creates an `AKSequencer` from `tracks`
   public func setupSequencer() {
-    sequencer = AKAppleSequencer()
+    sequencer = AppleSequencer()
     
     for (index, track) in tracks.enumerated() {
       guard let newTrack = sequencer?.newTrack(track.name) else { continue }
@@ -79,8 +209,8 @@ public class MIDISequencer: AKMIDIListener {
 
         for step in track.steps {
           let velocity = MIDIVelocity(step.velocity.velocity)
-          let position = AKDuration(beats: step.position)
-          let duration = AKDuration(beats: step.duration)
+          let position = Duration(beats: step.position)
+          let duration = Duration(beats: step.duration)
 
           for note in step.notes {
             let noteNumber = MIDINoteNumber(note.rawValue)
@@ -96,7 +226,7 @@ public class MIDISequencer: AKMIDIListener {
     }
 
     sequencer?.setTempo(tempo.bpm)
-    sequencer?.setLength(AKDuration(beats: duration.duration(of: self)))
+    sequencer?.setLength(Duration(beats: duration.duration(of: self)))
     sequencer?.enableLooping()
   }
 
@@ -121,11 +251,6 @@ public class MIDISequencer: AKMIDIListener {
     }
   }
 
-  /// Stops playing the sequence.
-  public func stop() {
-    sequencer?.stop()
-    sequencer = nil
-  }
 
   // MARK: Track Management
 
@@ -172,7 +297,7 @@ public class MIDISequencer: AKMIDIListener {
     return true
   }
 
-  // MARK: AKMIDIListener
+  // MARK: MIDIListener
 
   public func receivedMIDINoteOn(noteNumber: MIDINoteNumber, velocity: MIDIVelocity, channel: MIDIChannel) {
     guard sequencer?.isPlaying == true, tracks.indices.contains(Int(channel)) else {

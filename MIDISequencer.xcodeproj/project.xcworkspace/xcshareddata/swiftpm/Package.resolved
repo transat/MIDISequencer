@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AudioKit",
+        "repositoryURL": "https://github.com/AudioKit/AudioKit",
+        "state": {
+          "branch": "v5-main",
+          "revision": "b71bcdb2d353fec6825469fc215dcade206b07fd",
+          "version": null
+        }
+      },
+      {
+        "package": "MusicTheory",
+        "repositoryURL": "https://github.com/cemolcay/MusicTheory.git",
+        "state": {
+          "branch": null,
+          "revision": "c98ffac448a3096717a841de31eb4a6cbcd873d4",
+          "version": "1.3.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
